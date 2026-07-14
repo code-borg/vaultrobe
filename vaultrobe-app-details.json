@@ -1,0 +1,345 @@
+{
+  "appName": "Vaultrobe",
+  "packageName": "com.vaultrobe.app",
+  "versionName": "1.0",
+  "versionCode": 1,
+  "sdk": {
+    "minSdk": 24,
+    "targetSdk": 37,
+    "compileSdk": 37
+  },
+  "shortDescription": "A modern, multi-user Android closet management application built with Jetpack Compose. This app streamlines family wardrobe organization by providing a sleek, digital archive with a focus on high-end UX and seamless sharing.",
+  "tagline": "Vaultrobe is an Android digital wardrobe manager.",
+  "fullDescription": "A modern, multi-user Android closet management application built with Jetpack Compose. This app streamlines family wardrobe organization by providing a sleek, digital archive with a focus on high-end UX and seamless sharing.",
+  "keyFeatures": [
+    "AI garment classification / scan",
+    "Background removal",
+    "Photo editor (crop / rotate / feather)",
+    "AI outfit recommendations",
+    "Freeform outfit canvas / collage",
+    "Laundry tracker pipeline",
+    "Weekly outfit planner",
+    "Wear history & calendar",
+    "Wardrobe analytics / stats",
+    "Voice remarks / speech-to-text",
+    "Backup (local and/or Google Drive)",
+    "Credit-based AI usage / in-app purchases",
+    "App lock (biometric / PIN)",
+    "Weather-aware outfit suggestions",
+    "Multi-dimension outfit scoring engine",
+    "Onboarding with Google Sign-In",
+    "Photo capture guide for garments",
+    "Digital closet / wardrobe grid",
+    "Saved outfit collections",
+    "Multi-profile support"
+  ],
+  "themes": [
+    "lux-rose-gold",
+    "ivory-linen",
+    "studio-mist",
+    "glassmorphic",
+    "dark",
+    "light"
+  ],
+  "colorPalette": {
+    "semantic": {
+      "primary": "#FFC9A96E",
+      "accent": "#FFB76E79",
+      "background": "#FF0E0C0A",
+      "surface": "#FF0E0C0A",
+      "onSurface": "#FFF0EAD6"
+    },
+    "fromColorsXml": {
+      "purple_200": "#FFBB86FC",
+      "purple_500": "#FF6200EE",
+      "purple_700": "#FF3700B3",
+      "teal_200": "#FF03DAC5",
+      "teal_700": "#FF018786",
+      "black": "#FF000000",
+      "white": "#FFFFFFFF",
+      "ic_launcher_background": "#0E0C0A"
+    },
+    "fromThemeKotlin": {
+      "ChipBlueBorder": "#FF1A4060",
+      "ChipBlueBorderLight": "#FF9CC8DC",
+      "ChipGoldBg": "#FF2A1A08",
+      "ChipGoldBgLight": "#FFF5EDDC",
+      "ChipGoldBorder": "#FF5A3A10",
+      "ChipGoldBorderLight": "#FFD4C090",
+      "ChipGoldFg": "#FFC98A40",
+      "ChipGoldFgLight": "#FF7A5A18",
+      "ChipGreenBorder": "#FF3A5A18",
+      "ChipGreenBorderLight": "#FFB5D48A",
+      "ChipOliveBorder": "#FF304020",
+      "ChipOliveBorderLight": "#FFB8D090",
+      "ChipPinkBg": "#FF2A1028",
+      "ChipPinkBgLight": "#FFF8E8F4",
+      "ChipPinkBorder": "#FF5A2050",
+      "ChipPinkBorderLight": "#FFE0A8D4",
+      "ChipPinkFg": "#FFC060B0",
+      "ChipPinkFgLight": "#FF8A3A78",
+      "ChipPurpleBorder": "#FF303060",
+      "ChipPurpleBorderLight": "#FFB8B8E0",
+      "PinkItem": "#FFD4537E",
+      "border13": "#22FFFFFF",
+      "border15": "#26FFFFFF",
+      "border20": "#33FFFFFF",
+      "border22": "#38FFFFFF",
+      "causticWarm": "#28F3E6D8",
+      "dangerBorder": "#59F09595",
+      "dossierBg": "#FF0B0A09",
+      "dossierCard": "#FF14120F",
+      "dossierCardRaised": "#FF1C1915",
+      "dossierInk": "#FFEFE9DC",
+      "editorGold": "#FFD4AF37",
+      "errorBgDeep": "#FF2A0A0A",
+      "favoritePink": "#FFEC4899",
+      "glassBlobA": "#00000000",
+      "glassBlobB": "#00000000",
+      "glassBlobC": "#00000000",
+      "glassBorder": "#00000000",
+      "glassBorderBright": "#00000000",
+      "glassFill": "#00000000",
+      "glassFillRaised": "#00000000",
+      "glassHighlight": "#00000000",
+      "gold": "#FFC9A84C",
+      "goldBorder": "#44C9A84C",
+      "goldBorderStrong": "#73CBA84F",
+      "goldBrownBg": "#FF3E2E0A",
+      "goldDim": "#FF7A6A44",
+      "goldFaint": "#1FCBA84F",
+      "goldFill05": "#0DCBA84F",
+      "goldGradBottom": "#FFBA9038",
+      "goldGradEdge": "#FFE5CA72",
+      "goldGradTop": "#FFDDBE68",
+      "goldLight": "#FFDCC089",
+      "goldSoft": "#FF9C8240",
+      "goldSolid85": "#D9CBA84F",
+      "goldSubtle": "#18C9A84C",
+      "iconDimWarm": "#FF4A4438",
+      "inkBlack": "#FF0A0A0A",
+      "inkBlackSoft": "#FF1A1A1A",
+      "inkFaint": "#FF8A7E6C",
+      "inkOnGold": "#FF161208",
+      "inkOnGoldDeep": "#FF1A1408",
+      "inkOnGoldWarm": "#FF14110A",
+      "inkSoft": "#FFD6CBB6",
+      "ivory": "#FFF0EAD6",
+      "linePrimary": "#40CBA84F",
+      "luxBorder": "#FF2E2818",
+      "luxCardBg": "#FF1A1710",
+      "luxDarkBg": "#FF0E0C0A",
+      "luxError": "#FFE84050",
+      "luxGlow": "#FF2A1E0E",
+      "luxGold": "#FFC9A96E",
+      "luxRoseGold": "#FFB76E79",
+      "luxSurfaceDark": "#FF0E0C0A",
+      "luxTeal": "#FF81C784",
+      "luxWarmWhite": "#FFE8DDD0",
+      "midnight": "#FF0E0C14",
+      "obsidian": "#FF1A1625",
+      "placeholderInk": "#FF6E6353",
+      "scrim": "#CC0B0A09",
+      "scrimSolid": "#FF0F0D0B",
+      "surface2": "#FF2A2535",
+      "warm": "#88F7EDE4"
+    }
+  },
+  "mainScreens": [
+    "Add to Wardrobe",
+    "App Lock / Auth",
+    "Wear Calendar",
+    "Wardrobe Grid / Closet",
+    "Photo Editor",
+    "Home / Dashboard",
+    "Laundry Tracker",
+    "Main Tabs Scaffold",
+    "Outfit Planner",
+    "Onboarding",
+    "Welcome",
+    "Outfit Collections",
+    "Item Detail",
+    "AI Scan",
+    "Buy Credits",
+    "Camera Preview",
+    "Settings",
+    "Splash",
+    "Stats",
+    "Profiles",
+    "Closet",
+    "Product Info",
+    "Laundry",
+    "Log Wear Picker",
+    "Home",
+    "Outfits",
+    "Plan",
+    "Profile"
+  ],
+  "techStack": [
+    "Kotlin",
+    "Android",
+    "minSdk 24",
+    "targetSdk 37",
+    "Jetpack Compose",
+    "Material 3",
+    "Room",
+    "Navigation Compose",
+    "DataStore",
+    "CameraX",
+    "ML Kit",
+    "Firebase",
+    "Google Play Billing",
+    "WorkManager",
+    "Coil",
+    "AndroidX Biometric",
+    "Google Sign-In",
+    "Google Drive API",
+    "Play Services Location",
+    "OpenCV",
+    "OkHttp",
+    "KSP",
+    "Kotlin Coroutines",
+    "Gemini / Generative AI",
+    "Accompanist",
+    "Reorderable (Compose)",
+    "MVVM",
+    "Domain layer (pure Kotlin)"
+  ],
+  "privacyHighlights": [
+    "Primary wardrobe data stored locally (Room database)",
+    "Preferences stored locally (DataStore)",
+    "Optional Google Drive backup (app data scope) — user-initiated",
+    "Optional local ZIP / SAF backup",
+    "Firebase Authentication used for signed-in AI classification",
+    "AI classification sends images to a backend Cloud Function when user scans",
+    "Optional app lock with biometric / PIN",
+    "Location permission used for weather (when feature is active)",
+    "No ad SDK detected in project dependencies"
+  ],
+  "onboardingHighlights": [
+    "Onboarding steps: Profile → Style → Starter Items → Complete",
+    "Profile: Gender, age, height, body shape, optional display name.",
+    "Style: Multi-select style / color / occasion chips.",
+    "Starter Items: Camera permission + guided starter-item nudge (target 3).",
+    "Complete: Success + continue into the vault.",
+    "Starter wardrobe nudge: target 3 items",
+    "Collects user preference: genders",
+    "Collects user preference: ageRanges",
+    "Collects user preference: bodyShapes",
+    "Collects user preference: styles",
+    "Collects user preference: occasions",
+    "Welcome / pre-auth entry with Google Sign-In",
+    "Photo guide tips present:",
+    "  • Lighting: Bright, even natural light. Avoid direct flash or harsh shadows that hide fabric detail.",
+    "  • Background: Plain solid color — a white wall, light bedsheet, or clean floor works beautifully.",
+    "  • Framing & angle: Straight-on view, item fully visible and centered. Use the grid for clean edges.",
+    "  • Preparation: Smooth wrinkles, remove tags and hangers. Lay flat or hang neatly before you shoot.",
+    "  • Bonus for try-on: Capture a front and a side angle — depth helps virtual try-on look natural.",
+    "Photo guide sheet title: Tips for Perfect Vault Photos",
+    "Photo guide subtitle: A few seconds of care makes cataloging, background removal, and try-on shine."
+  ],
+  "monetization": {
+    "model": "freemium_credits",
+    "premiumFeatures": [
+      "AI scan / classification gated by credits",
+      "Buy credits UI / credit counter"
+    ],
+    "creditPacks": [
+      {
+        "productId": "credits_pack_10",
+        "credits": 10,
+        "displayPrice": "₹49"
+      },
+      {
+        "productId": "credits_pack_50",
+        "credits": 50,
+        "displayPrice": "₹179"
+      },
+      {
+        "productId": "credits_pack_150",
+        "credits": 150,
+        "displayPrice": "₹449"
+      }
+    ],
+    "pricingHints": [
+      "10 credits → ₹49 (credits_pack_10)",
+      "50 credits → ₹179 (credits_pack_50)",
+      "150 credits → ₹449 (credits_pack_150)"
+    ],
+    "notes": [
+      "In-app products detected via Play Billing",
+      "Credits deducted per AI scan (when implemented in repository/DAO)"
+    ]
+  },
+  "permissions": [
+    {
+      "name": "android.permission.ACCESS_COARSE_LOCATION",
+      "description": "Coarse location (weather)"
+    },
+    {
+      "name": "android.permission.ACCESS_FINE_LOCATION",
+      "description": "Fine location (weather)"
+    },
+    {
+      "name": "android.permission.ACCESS_NETWORK_STATE",
+      "description": "Network state"
+    },
+    {
+      "name": "android.permission.CAMERA",
+      "description": "Camera (photo capture / AI scan)"
+    },
+    {
+      "name": "android.permission.INTERNET",
+      "description": "Internet"
+    },
+    {
+      "name": "android.permission.POST_NOTIFICATIONS",
+      "description": "Notifications"
+    },
+    {
+      "name": "android.permission.RECEIVE_BOOT_COMPLETED",
+      "description": "Boot completed (reschedule reminders)"
+    },
+    {
+      "name": "android.permission.RECORD_AUDIO",
+      "description": "Microphone (voice remarks / speech)"
+    },
+    {
+      "name": "android.permission.SCHEDULE_EXACT_ALARM",
+      "description": "Exact alarms (wear reminders)"
+    },
+    {
+      "name": "android.permission.USE_BIOMETRIC",
+      "description": "Biometric unlock"
+    }
+  ],
+  "_meta": {
+    "generator": "tools/extract_app_details.py",
+    "projectRoot": "D:\\Workspace\\AndroidProjects\\DigitalWardrobe",
+    "sources": {
+      "manifest": "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\AndroidManifest.xml",
+      "stringsXml": "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\res\\values\\strings.xml",
+      "colorsXml": "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\res\\values\\colors.xml",
+      "gradleFiles": [
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\build.gradle.kts",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\build.gradle.kts"
+      ],
+      "javaSrc": "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java",
+      "themeFiles": [
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\CategoryColors.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\Color.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\Glass.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\PixrobeColors.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\SemanticColors.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\Spacing.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\Theme.kt",
+        "D:\\Workspace\\AndroidProjects\\DigitalWardrobe\\app\\src\\main\\java\\com\\vaultrobe\\app\\ui\\theme\\Type.kt"
+      ]
+    },
+    "notes": [
+      "All fields are derived from repository content only.",
+      "Null/empty arrays mean no evidence was found — not that the app lacks the concept.",
+      "Marketing copy should be reviewed before store listing use."
+    ]
+  }
+}

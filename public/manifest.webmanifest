@@ -1,0 +1,17 @@
+{
+  "name": "Vaultrobe",
+  "short_name": "Vaultrobe",
+  "description": "Premium Android digital wardrobe manager",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0E0C0A",
+  "theme_color": "#0E0C0A",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

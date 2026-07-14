@@ -1,0 +1,584 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── Dark (default) — high-contrast luxe ─── */
+/* Channel tokens are space-separated RGB for Tailwind opacity support */
+:root {
+  --lux-bg: 11 10 8;
+  --lux-surface: 21 18 14;
+  --lux-raised: 31 27 21;
+  --lux-card: 26 23 18;
+  --lux-border: 70 60 40;
+  --lux-gold: 232 196 110;
+  --lux-gold-bright: 245 220 130;
+  --lux-gold-edge: 250 230 150;
+  --lux-gold-dim: 168 136 64;
+  --lux-rose: 220 140 148;
+  --lux-emerald: 130 210 140;
+  --lux-ivory: 255 250 240;
+  --lux-ink: 255 250 240;
+  --lux-ink-soft: 235 224 204;
+  --lux-ink-faint: 200 186 162;
+  --lux-midnight: 14 12 20;
+
+  --glass-bg: rgba(26, 22, 16, 0.72);
+  --glass-border: rgba(232, 196, 110, 0.28);
+  --glass-highlight: rgba(255, 255, 255, 0.14);
+  --hover-fill: rgba(255, 255, 255, 0.08);
+  --subtle-border: rgba(255, 255, 255, 0.12);
+  --phone-bg-start: #1f1b15;
+  --phone-bg-end: #0b0a08;
+  --gold-grad-a: #f5e082;
+  --gold-grad-b: #e8c46e;
+  --gold-grad-c: #c9a038;
+  --selection-fg: #0b0a08;
+  --scrollbar-track: #0b0a08;
+  --scrollbar-thumb: #3a3224;
+  --page-vignette: rgba(0, 0, 0, 0.45);
+  --mesh-a: rgba(232, 196, 110, 0.16);
+  --mesh-b: rgba(183, 110, 121, 0.1);
+  --mesh-c: rgba(129, 199, 132, 0.08);
+}
+
+/* ─── Light — crisp paper & ink ─── */
+.light {
+  --lux-bg: 247 242 232;
+  --lux-surface: 255 255 255;
+  --lux-raised: 255 255 255;
+  --lux-card: 255 255 255;
+  --lux-border: 180 160 110;
+  --lux-gold: 130 96 24;
+  --lux-gold-bright: 150 108 18;
+  --lux-gold-edge: 168 120 20;
+  --lux-gold-dim: 100 74 18;
+  --lux-rose: 160 56 72;
+  --lux-emerald: 34 110 48;
+  --lux-ivory: 18 14 10;
+  --lux-ink: 18 14 10;
+  --lux-ink-soft: 40 32 22;
+  --lux-ink-faint: 74 64 48;
+  --lux-midnight: 240 235 224;
+
+  --glass-bg: rgba(255, 255, 255, 0.78);
+  --glass-border: rgba(130, 96, 24, 0.28);
+  --glass-highlight: rgba(255, 255, 255, 1);
+  --hover-fill: rgba(18, 14, 10, 0.06);
+  --subtle-border: rgba(18, 14, 10, 0.12);
+  --phone-bg-start: #1f1b15;
+  --phone-bg-end: #0b0a08;
+  --gold-grad-a: #a67c12;
+  --gold-grad-b: #8a6410;
+  --gold-grad-c: #6e4e0c;
+  --selection-fg: #fffaf0;
+  --scrollbar-track: #ebe4d4;
+  --scrollbar-thumb: #c4b49a;
+  --page-vignette: rgba(80, 60, 20, 0.06);
+  --mesh-a: rgba(201, 169, 110, 0.22);
+  --mesh-b: rgba(183, 110, 121, 0.1);
+  --mesh-c: rgba(80, 160, 90, 0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(var(--lux-bg));
+  color: rgb(var(--lux-ink));
+  font-feature-settings: "ss01" on, "ss02" on;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ─── Glassmorphism primitives ─── */
+@layer components {
+  .glass {
+    background: var(--glass-bg);
+    backdrop-filter: blur(22px) saturate(170%);
+    -webkit-backdrop-filter: blur(22px) saturate(170%);
+    border: 1px solid var(--glass-border);
+    box-shadow:
+      0 10px 40px rgba(0, 0, 0, 0.32),
+      0 1px 0 rgba(255, 255, 255, 0.04),
+      inset 0 1px 0 var(--glass-highlight);
+  }
+
+  .light .glass {
+    box-shadow:
+      0 12px 36px rgba(40, 28, 10, 0.08),
+      0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .glass-strong {
+    background: rgba(22, 19, 14, 0.9);
+    backdrop-filter: blur(28px) saturate(180%);
+    -webkit-backdrop-filter: blur(28px) saturate(180%);
+    border: 1px solid rgba(232, 196, 110, 0.32);
+    box-shadow:
+      0 20px 60px rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  }
+
+  .light .glass-strong {
+    background: rgba(255, 255, 255, 0.94);
+    border-color: rgba(130, 96, 24, 0.26);
+    box-shadow:
+      0 16px 48px rgba(40, 28, 10, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .glass-gold {
+    background: linear-gradient(
+      145deg,
+      rgba(232, 196, 110, 0.22) 0%,
+      rgba(26, 22, 16, 0.85) 42%,
+      rgba(232, 196, 110, 0.12) 100%
+    );
+    backdrop-filter: blur(24px) saturate(170%);
+    -webkit-backdrop-filter: blur(24px) saturate(170%);
+    border: 1px solid rgba(232, 196, 110, 0.48);
+    box-shadow:
+      0 0 60px rgba(232, 196, 110, 0.14),
+      0 16px 48px rgba(0, 0, 0, 0.35),
+      inset 0 1px 0 rgba(245, 220, 130, 0.28);
+  }
+
+  .light .glass-gold {
+    background: linear-gradient(
+      145deg,
+      rgba(232, 196, 110, 0.28) 0%,
+      rgba(255, 255, 255, 0.96) 42%,
+      rgba(247, 236, 210, 0.95) 100%
+    );
+    border-color: rgba(130, 96, 24, 0.38);
+    box-shadow:
+      0 16px 48px rgba(40, 28, 10, 0.1),
+      0 0 40px rgba(201, 169, 110, 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 1);
+  }
+
+  .text-gold-gradient {
+    background: linear-gradient(
+      135deg,
+      var(--gold-grad-a) 0%,
+      var(--gold-grad-b) 40%,
+      var(--gold-grad-c) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .btn-gold {
+    @apply relative inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5
+      text-sm font-semibold tracking-wide transition-all duration-300;
+    overflow: hidden;
+    background: linear-gradient(135deg, #f0d878 0%, #e0b84a 45%, #c49a28 100%);
+    color: #161208;
+    box-shadow:
+      0 4px 24px rgba(201, 169, 110, 0.45),
+      0 0 0 1px rgba(255, 230, 160, 0.2),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-gold::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      105deg,
+      transparent 40%,
+      rgba(255, 255, 255, 0.4) 50%,
+      transparent 60%
+    );
+    transform: translateX(-120%);
+    pointer-events: none;
+  }
+
+  .btn-gold:hover::after {
+    animation: btnShine 0.75s ease forwards;
+  }
+
+  .light .btn-gold {
+    background: linear-gradient(135deg, #d4a82e 0%, #b88918 50%, #966e10 100%);
+    color: #fffdf5;
+    box-shadow:
+      0 4px 20px rgba(130, 96, 24, 0.35),
+      inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  }
+
+  .btn-gold:hover {
+    transform: translateY(-2px);
+    box-shadow:
+      0 10px 36px rgba(201, 169, 110, 0.55),
+      0 0 0 1px rgba(255, 230, 160, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.5);
+  }
+
+  .btn-ghost {
+    @apply inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5
+      text-sm font-semibold tracking-wide transition-all duration-300;
+    background: rgb(var(--lux-gold) / 0.06);
+    border: 1.5px solid rgb(var(--lux-gold) / 0.5);
+    color: rgb(var(--lux-gold));
+    backdrop-filter: blur(8px);
+  }
+
+  .btn-ghost:hover {
+    background: rgb(var(--lux-gold) / 0.14);
+    border-color: rgb(var(--lux-gold) / 0.8);
+    box-shadow: 0 0 24px rgb(var(--lux-gold) / 0.12);
+  }
+
+  .section-label {
+    @apply text-xs font-semibold uppercase tracking-[0.25em];
+    color: rgb(var(--lux-gold));
+  }
+
+  .section-title {
+    @apply font-display text-3xl font-medium leading-tight sm:text-4xl md:text-5xl;
+    color: rgb(var(--lux-ivory));
+  }
+
+  .section-sub {
+    @apply max-w-2xl text-base leading-relaxed sm:text-lg;
+    color: rgb(var(--lux-ink-faint));
+  }
+
+  /* Soft page mesh behind all content */
+  .page-atmosphere {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .page-atmosphere::before {
+    content: "";
+    position: absolute;
+    inset: -20%;
+    background:
+      radial-gradient(ellipse 50% 40% at 15% 20%, var(--mesh-a), transparent 55%),
+      radial-gradient(ellipse 45% 35% at 85% 15%, var(--mesh-b), transparent 50%),
+      radial-gradient(ellipse 55% 45% at 70% 75%, var(--mesh-c), transparent 55%),
+      radial-gradient(ellipse 40% 30% at 20% 80%, rgba(232, 196, 110, 0.06), transparent 50%);
+    animation: atmosphereDrift 28s ease-in-out infinite alternate;
+  }
+
+  .page-atmosphere::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(
+      ellipse 80% 70% at 50% 40%,
+      transparent 30%,
+      var(--page-vignette) 100%
+    );
+  }
+
+  .light .page-atmosphere::before {
+    opacity: 0.85;
+  }
+
+  /* Alternating section bands for rhythm */
+  .section-band {
+    position: relative;
+  }
+
+  .section-band-surface {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--lux-surface) / 0.35) 0%,
+      rgb(var(--lux-surface) / 0.15) 50%,
+      transparent 100%
+    );
+  }
+
+  .light .section-band-surface {
+    background: linear-gradient(
+      180deg,
+      rgb(255 255 255 / 0.55) 0%,
+      rgb(255 255 255 / 0.2) 60%,
+      transparent 100%
+    );
+  }
+
+  .section-divider {
+    pointer-events: none;
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(var(--lux-gold) / 0.15) 20%,
+      rgb(var(--lux-gold) / 0.45) 50%,
+      rgb(var(--lux-gold) / 0.15) 80%,
+      transparent 100%
+    );
+  }
+
+  .section-divider::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 0;
+    height: 1px;
+    width: min(40%, 280px);
+    transform: translateX(-50%);
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--lux-gold) / 0.7),
+      transparent
+    );
+    filter: blur(0.5px);
+  }
+
+  /* Icon wells — tinted, glowing containers */
+  .icon-well {
+    @apply flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl;
+    background: linear-gradient(
+      145deg,
+      rgb(var(--lux-gold) / 0.18) 0%,
+      rgb(var(--lux-gold) / 0.06) 100%
+    );
+    border: 1px solid rgb(var(--lux-gold) / 0.22);
+    box-shadow:
+      0 0 20px rgb(var(--lux-gold) / 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: rgb(var(--lux-gold));
+  }
+
+  .icon-well-gold {
+    background: linear-gradient(
+      145deg,
+      rgb(var(--lux-gold) / 0.28) 0%,
+      rgb(var(--lux-gold) / 0.1) 100%
+    );
+    border-color: rgb(var(--lux-gold) / 0.4);
+    box-shadow:
+      0 0 28px rgb(var(--lux-gold) / 0.18),
+      inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  }
+
+  .icon-well-rose {
+    background: linear-gradient(
+      145deg,
+      rgb(var(--lux-rose) / 0.22) 0%,
+      rgb(var(--lux-rose) / 0.06) 100%
+    );
+    border-color: rgb(var(--lux-rose) / 0.28);
+    box-shadow:
+      0 0 22px rgb(var(--lux-rose) / 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: rgb(var(--lux-rose));
+  }
+
+  .icon-well-emerald {
+    background: linear-gradient(
+      145deg,
+      rgb(var(--lux-emerald) / 0.2) 0%,
+      rgb(var(--lux-emerald) / 0.06) 100%
+    );
+    border-color: rgb(var(--lux-emerald) / 0.28);
+    box-shadow:
+      0 0 22px rgb(var(--lux-emerald) / 0.12),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    color: rgb(var(--lux-emerald));
+  }
+
+  /* Pull-quote / closing line */
+  .section-closer {
+    @apply mx-auto max-w-2xl text-center font-display text-lg sm:text-xl;
+    color: rgb(var(--lux-ink-soft));
+    position: relative;
+  }
+
+  .section-closer-gold {
+    color: rgb(var(--lux-gold));
+  }
+
+  .section-closer::before {
+    content: "";
+    display: block;
+    width: 2.5rem;
+    height: 1px;
+    margin: 0 auto 1.25rem;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgb(var(--lux-gold) / 0.55),
+      transparent
+    );
+  }
+
+  .phone-frame {
+    @apply relative overflow-hidden rounded-[2rem] border;
+    border-color: rgba(232, 196, 110, 0.4);
+    background: linear-gradient(
+      160deg,
+      var(--phone-bg-start) 0%,
+      var(--phone-bg-end) 100%
+    );
+    box-shadow:
+      0 36px 90px rgba(0, 0, 0, 0.6),
+      0 0 0 1px rgba(232, 196, 110, 0.14),
+      0 0 60px rgba(232, 196, 110, 0.1),
+      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    /* Mock phone stays dark UI in both themes */
+    color: #fffaf0;
+  }
+
+  .phone-frame .text-lux-ivory,
+  .phone-frame .text-lux-ink,
+  .phone-frame .text-lux-ink-soft {
+    color: #fffaf0 !important;
+  }
+
+  .phone-frame .text-lux-ink-faint {
+    color: #c9bba2 !important;
+  }
+
+  .phone-frame .text-lux-gold {
+    color: #e8c46e !important;
+  }
+
+  .noise-overlay {
+    pointer-events: none;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  .light .noise-overlay {
+    opacity: 0.02;
+  }
+
+  /* Theme-aware subtle surfaces (replaces white/5 etc.) */
+  .bg-hover-fill {
+    background-color: var(--hover-fill);
+  }
+
+  .border-subtle {
+    border-color: var(--subtle-border);
+  }
+
+  .divide-subtle > :not([hidden]) ~ :not([hidden]) {
+    border-color: var(--subtle-border);
+  }
+
+  /* Ambient orbs — reusable colored glows */
+  .orb {
+    pointer-events: none;
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(64px);
+  }
+
+  .orb-gold {
+    background: radial-gradient(circle, rgba(232, 196, 110, 0.35), transparent 70%);
+  }
+
+  .orb-rose {
+    background: radial-gradient(circle, rgba(183, 110, 121, 0.28), transparent 70%);
+  }
+
+  .orb-emerald {
+    background: radial-gradient(circle, rgba(129, 199, 132, 0.25), transparent 70%);
+  }
+
+  .light .orb-gold {
+    background: radial-gradient(circle, rgba(201, 169, 110, 0.4), transparent 70%);
+  }
+
+  .light .orb-rose {
+    background: radial-gradient(circle, rgba(183, 110, 121, 0.22), transparent 70%);
+  }
+
+  .light .orb-emerald {
+    background: radial-gradient(circle, rgba(80, 160, 90, 0.22), transparent 70%);
+  }
+}
+
+/* Selection */
+::selection {
+  background: rgb(var(--lux-gold) / 0.4);
+  color: var(--selection-fg);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--scrollbar-track);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--lux-gold));
+}
+
+/* Focus ring */
+:focus-visible {
+  outline: 2px solid rgb(var(--lux-gold) / 0.7);
+  outline-offset: 2px;
+}
+
+/* ─── Ambient motion helpers ─── */
+.animate-shimmer-text {
+  background-size: 200% auto;
+  animation: shimmer 4s linear infinite;
+}
+
+@keyframes btnShine {
+  to {
+    transform: translateX(120%);
+  }
+}
+
+@keyframes atmosphereDrift {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  100% {
+    transform: translate(-2%, 1.5%) scale(1.05);
+  }
+}
+
+/* Content sits above fixed atmosphere */
+main,
+header,
+footer {
+  position: relative;
+  z-index: 1;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .page-atmosphere::before {
+    animation: none !important;
+  }
+}
