@@ -24,7 +24,7 @@ export function GettingStarted() {
     <section id="getting-started" className="section-band relative py-20 md:py-28">
       <div className="section-divider" />
       <div
-        className="orb orb-gold absolute left-1/4 top-1/3 h-64 w-64 animate-orb-drift motion-reduce:animate-none"
+        className="orb orb-gold absolute left-1/4 top-1/3 hidden h-64 w-64 animate-orb-drift motion-reduce:animate-none md:block"
         aria-hidden
       />
 
@@ -85,7 +85,7 @@ export function GettingStarted() {
           transition={{ duration: 0.65, ease: easeOutExpo }}
         >
           <div
-            className="orb orb-emerald pointer-events-none absolute -right-12 -top-12 h-48 w-48 opacity-60"
+            className="orb orb-emerald pointer-events-none absolute -right-12 -top-12 hidden h-48 w-48 opacity-60 md:block"
             aria-hidden
           />
           <div className="relative mb-8 max-w-2xl">

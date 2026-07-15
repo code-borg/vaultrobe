@@ -283,7 +283,7 @@ export const gettingStartedCopy: GettingStartedCopy = {
           "A plain, solid-colored background (white or light gray) works best.",
       },
       {
-        title: "Framing & angle",
+        title: "Framing & Angle",
         description:
           "Lay garments flat or hang them straight. Capture the full item with some breathing room.",
       },

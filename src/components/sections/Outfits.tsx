@@ -15,7 +15,7 @@ export function Outfits() {
     <section id="outfits" className="section-band section-band-surface relative py-20 md:py-28">
       <div className="section-divider" />
       <div
-        className="orb orb-emerald absolute -left-16 bottom-0 h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none"
+        className="orb orb-emerald absolute -left-16 bottom-0 hidden h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none md:block"
         aria-hidden
       />
 

@@ -1,7 +1,8 @@
 "use client";
 
-import { motion, type HTMLMotionProps, useReducedMotion } from "framer-motion";
+import { motion, type HTMLMotionProps } from "framer-motion";
 import { cn } from "@/lib/cn";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 interface GlassCardProps extends HTMLMotionProps<"div"> {
   variant?: "default" | "strong" | "gold";
@@ -23,7 +24,7 @@ export function GlassCard({
   className,
   ...props
 }: GlassCardProps) {
-  const reduceMotion = useReducedMotion();
+  const lite = useLiteMotion();
 
   return (
     <motion.div
@@ -35,7 +36,7 @@ export function GlassCard({
         className
       )}
       whileHover={
-        hover && !reduceMotion
+        hover && !lite
           ? {
               y: -7,
               scale: 1.018,
@@ -43,7 +44,7 @@ export function GlassCard({
             }
           : undefined
       }
-      whileTap={hover && !reduceMotion ? { scale: 0.99 } : undefined}
+      whileTap={hover && !lite ? { scale: 0.99 } : undefined}
       {...props}
     >
       {/* Top sheen edge */}

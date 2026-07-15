@@ -1,20 +1,21 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { Heart } from "lucide-react";
 import { BrandLogo } from "@/components/icons/BrandLogo";
 import { siteConfig } from "@/lib/data";
 import { footerCopy } from "@/lib/landing-copy";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const reduceMotion = useReducedMotion();
+  const lite = useLiteMotion();
 
   return (
     <footer className="relative border-t border-lux-gold/10 pb-10 pt-14">
       <div className="section-divider" />
       <div
-        className="orb orb-gold pointer-events-none absolute bottom-0 left-1/2 h-40 w-64 -translate-x-1/2 opacity-40"
+        className="orb orb-gold pointer-events-none absolute bottom-0 left-1/2 hidden h-40 w-64 -translate-x-1/2 opacity-40 md:block"
         aria-hidden
       />
 
@@ -65,9 +66,7 @@ export function Footer() {
             Made with{" "}
             <motion.span
               className="inline-flex"
-              animate={
-                reduceMotion ? undefined : { scale: [1, 1.25, 1] }
-              }
+              animate={lite ? undefined : { scale: [1, 1.25, 1] }}
               transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
             >
               <Heart

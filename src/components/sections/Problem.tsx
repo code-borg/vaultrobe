@@ -25,11 +25,11 @@ export function Problem() {
     >
       <div className="section-divider" />
       <div
-        className="orb orb-rose absolute left-0 top-1/4 h-80 w-80 animate-orb-drift motion-reduce:animate-none"
+        className="orb orb-rose absolute left-0 top-1/4 hidden h-80 w-80 animate-orb-drift motion-reduce:animate-none md:block"
         aria-hidden
       />
       <div
-        className="orb orb-gold absolute bottom-1/4 right-0 h-64 w-64 animate-orb-drift-reverse motion-reduce:animate-none"
+        className="orb orb-gold absolute bottom-1/4 right-0 hidden h-64 w-64 animate-orb-drift-reverse motion-reduce:animate-none md:block"
         aria-hidden
       />
 
@@ -50,7 +50,7 @@ export function Problem() {
             transition={{ duration: 0.65, ease: easeOutExpo }}
           >
             <div
-              className="orb orb-rose pointer-events-none absolute -right-10 -top-10 h-40 w-40 opacity-50"
+              className="orb orb-rose pointer-events-none absolute -right-10 -top-10 hidden h-40 w-40 opacity-50 md:block"
               aria-hidden
             />
 

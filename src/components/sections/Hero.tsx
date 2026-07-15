@@ -1,11 +1,12 @@
 "use client";
 
-import { motion, useReducedMotion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 import { heroCopy } from "@/lib/landing-copy";
 import { FeatureIcon } from "@/components/icons/FeatureIcon";
 import { easeOutExpo, fadeUp } from "@/lib/motion";
+import { useLiteMotion } from "@/lib/use-lite-motion";
 
 const closetItems = [
   { name: "Linen shirt", tone: "#C9A96E", accent: "#E8D4A0" },
@@ -17,7 +18,7 @@ const closetItems = [
 ];
 
 export function Hero() {
-  const reduceMotion = useReducedMotion();
+  const lite = useLiteMotion();
 
   return (
     <section
@@ -28,21 +29,22 @@ export function Hero() {
         className="pointer-events-none absolute inset-0 bg-radial-glow"
         aria-hidden
       />
+      {/* Ambient orbs — hidden on small screens (CSS); heavy blur filters jank mobile scroll */}
       <div
-        className="orb orb-emerald absolute -right-24 top-1/4 h-[420px] w-[420px] animate-orb-drift motion-reduce:animate-none"
+        className="orb orb-emerald absolute -right-24 top-1/4 hidden h-[420px] w-[420px] animate-orb-drift motion-reduce:animate-none md:block"
         aria-hidden
       />
       <div
-        className="orb orb-rose absolute -left-16 bottom-0 h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none"
+        className="orb orb-rose absolute -left-16 bottom-0 hidden h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none md:block"
         aria-hidden
       />
       <div
-        className="orb orb-gold absolute left-1/2 top-16 h-72 w-72 -translate-x-1/2 animate-glow-breathe motion-reduce:animate-none"
+        className="orb orb-gold absolute left-1/2 top-16 hidden h-72 w-72 -translate-x-1/2 animate-glow-breathe motion-reduce:animate-none md:block"
         aria-hidden
       />
-      {/* Soft grid texture */}
+      {/* Soft grid texture — desktop only (mask + fine lines cost mobile paint) */}
       <div
-        className="pointer-events-none absolute inset-0 opacity-[0.035]"
+        className="pointer-events-none absolute inset-0 hidden opacity-[0.035] md:block"
         style={{
           backgroundImage:
             "linear-gradient(rgb(232 196 110 / 0.4) 1px, transparent 1px), linear-gradient(90deg, rgb(232 196 110 / 0.4) 1px, transparent 1px)",
@@ -58,12 +60,12 @@ export function Hero() {
           <motion.div
             custom={0}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
-            className="mb-6 inline-flex items-center gap-2 rounded-full border border-lux-gold/30 bg-lux-gold/10 px-4 py-1.5 text-xs font-medium text-lux-gold shadow-gold-sm backdrop-blur-sm"
+            className="mb-6 inline-flex items-center gap-2 rounded-full border border-lux-gold/30 bg-lux-gold/10 px-4 py-1.5 text-xs font-medium text-lux-gold shadow-gold-sm md:backdrop-blur-sm"
           >
             <motion.span
-              animate={reduceMotion ? undefined : { rotate: [0, 12, -8, 0] }}
+              animate={lite ? undefined : { rotate: [0, 12, -8, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               className="inline-flex"
             >
@@ -75,7 +77,7 @@ export function Hero() {
           <motion.h1
             custom={1}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
             className="font-display text-4xl font-medium leading-[1.08] tracking-tight sm:text-5xl md:text-6xl lg:text-[3.65rem]"
           >
@@ -89,7 +91,7 @@ export function Hero() {
           <motion.p
             custom={2}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
             className="mt-6 max-w-lg text-base leading-relaxed text-lux-ink-soft sm:text-lg"
           >
@@ -99,7 +101,7 @@ export function Hero() {
           <motion.div
             custom={3}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
             className="mt-8 flex flex-wrap items-center gap-4"
           >
@@ -108,13 +110,13 @@ export function Hero() {
               target="_blank"
               rel="noopener noreferrer"
               className="btn-gold"
-              whileHover={reduceMotion ? undefined : { scale: 1.04, y: -2 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              whileHover={lite ? undefined : { scale: 1.04, y: -2 }}
+              whileTap={lite ? undefined : { scale: 0.98 }}
             >
               {heroCopy.primaryCta.label}
               <motion.span
                 className="inline-flex"
-                animate={reduceMotion ? undefined : { x: [0, 4, 0] }}
+                animate={lite ? undefined : { x: [0, 4, 0] }}
                 transition={{ duration: 1.6, repeat: Infinity, ease: "easeInOut" }}
               >
                 <ArrowRight size={16} />
@@ -123,8 +125,8 @@ export function Hero() {
             <motion.a
               href={heroCopy.secondaryCta.href}
               className="btn-ghost"
-              whileHover={reduceMotion ? undefined : { scale: 1.03 }}
-              whileTap={reduceMotion ? undefined : { scale: 0.98 }}
+              whileHover={lite ? undefined : { scale: 1.03 }}
+              whileTap={lite ? undefined : { scale: 0.98 }}
             >
               {heroCopy.secondaryCta.label}
             </motion.a>
@@ -133,7 +135,7 @@ export function Hero() {
           <motion.p
             custom={4}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
             className="mt-4 text-sm text-lux-ink-faint"
           >
@@ -143,7 +145,7 @@ export function Hero() {
           <motion.ul
             custom={5}
             variants={fadeUp}
-            initial="hidden"
+            initial={lite ? false : "hidden"}
             animate="show"
             className="mt-8 flex flex-wrap gap-x-3 gap-y-3 text-sm text-lux-ink-soft"
           >
@@ -151,11 +153,11 @@ export function Hero() {
               <motion.li
                 key={label}
                 className="glass flex items-center gap-2 rounded-full px-3 py-1.5"
-                initial={{ opacity: 0, x: -8 }}
+                initial={lite ? false : { opacity: 0, x: -8 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{
-                  delay: 0.55 + i * 0.1,
-                  duration: 0.45,
+                  delay: lite ? 0 : 0.55 + i * 0.1,
+                  duration: lite ? 0 : 0.45,
                   ease: easeOutExpo,
                 }}
               >
@@ -170,18 +172,22 @@ export function Hero() {
 
         <motion.div
           className="relative mx-auto flex w-full max-w-[280px] justify-center sm:max-w-md lg:max-w-none"
-          initial={{ opacity: 0, scale: 0.92 }}
+          initial={lite ? false : { opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.3, duration: 0.9, ease: easeOutExpo }}
+          transition={{
+            delay: lite ? 0 : 0.3,
+            duration: lite ? 0 : 0.9,
+            ease: easeOutExpo,
+          }}
         >
           {/* Mobile: single centered phone. sm+: dual floating composition */}
           <div className="relative mx-auto h-[500px] w-full sm:h-[540px] md:h-[580px]">
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lux-gold/15 shadow-gold animate-glow-breathe motion-reduce:animate-none sm:h-80 sm:w-80 md:h-96 md:w-96"
+              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lux-gold/15 shadow-gold animate-glow-breathe motion-reduce:animate-none sm:block sm:h-80 sm:w-80 md:h-96 md:w-96"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(232,196,110,0.2),transparent_70%)] blur-2xl sm:h-56 sm:w-56"
+              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(232,196,110,0.2),transparent_70%)] blur-2xl sm:block sm:h-56 sm:w-56"
               aria-hidden
             />
 
@@ -190,9 +196,7 @@ export function Hero() {
               className="phone-frame absolute left-0 top-10 hidden w-[180px] opacity-75 sm:block sm:w-[200px] md:left-4 md:w-[220px]"
               style={{ rotate: -8 }}
               animate={
-                reduceMotion
-                  ? undefined
-                  : { y: [0, -10, 0], rotate: [-8, -6, -8] }
+                lite ? undefined : { y: [0, -10, 0], rotate: [-8, -6, -8] }
               }
               transition={{
                 duration: 7,
@@ -200,7 +204,7 @@ export function Hero() {
                 ease: "easeInOut",
               }}
             >
-              <PhoneScreen variant="insights" label="Insights" />
+              <PhoneScreen variant="insights" label="Insights" lite={lite} />
             </motion.div>
 
             {/* Primary phone — centered on mobile, right-stacked from sm up */}
@@ -208,9 +212,7 @@ export function Hero() {
               <motion.div
                 className="phone-frame w-full shadow-gold-lg"
                 animate={
-                  reduceMotion
-                    ? undefined
-                    : { y: [0, -10, 0], rotate: [0, 1.2, 0] }
+                  lite ? undefined : { y: [0, -10, 0], rotate: [0, 1.2, 0] }
                 }
                 transition={{
                   duration: 5.5,
@@ -220,7 +222,7 @@ export function Hero() {
                 }}
               >
                 <div className="absolute left-1/2 top-3 z-20 h-5 w-20 -translate-x-1/2 rounded-full bg-black/80" />
-                <PhoneScreen variant="closet" label="Closet" />
+                <PhoneScreen variant="closet" label="Closet" lite={lite} />
               </motion.div>
             </div>
 
@@ -228,19 +230,14 @@ export function Hero() {
               <motion.div
                 className="glass rounded-2xl px-4 py-3"
                 animate={
-                  reduceMotion
+                  lite
                     ? undefined
                     : {
                         y: [0, -6, 0],
-                        boxShadow: [
-                          "0 8px 24px rgba(0,0,0,0.25)",
-                          "0 12px 40px rgba(232,196,110,0.22)",
-                          "0 8px 24px rgba(0,0,0,0.25)",
-                        ],
                       }
                 }
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                whileHover={reduceMotion ? undefined : { scale: 1.04 }}
+                whileHover={lite ? undefined : { scale: 1.04 }}
               >
                 <p className="text-xs text-lux-ink-faint">{siteConfig.name}</p>
                 <p className="font-display text-sm text-lux-gold">
@@ -258,9 +255,11 @@ export function Hero() {
 function PhoneScreen({
   variant,
   label,
+  lite = false,
 }: {
   variant: "closet" | "insights";
   label: string;
+  lite?: boolean;
 }) {
   if (variant === "closet") {
     return (
@@ -279,11 +278,11 @@ function PhoneScreen({
               style={{
                 background: `linear-gradient(145deg, ${item.accent}33 0%, ${item.tone}55 40%, #0e0c0a 100%)`,
               }}
-              initial={{ opacity: 0, scale: 0.85 }}
+              initial={lite ? false : { opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{
-                delay: 0.7 + i * 0.08,
-                duration: 0.45,
+                delay: lite ? 0 : 0.7 + i * 0.08,
+                duration: lite ? 0 : 0.45,
                 ease: easeOutExpo,
               }}
             >
@@ -294,7 +293,11 @@ function PhoneScreen({
                     background: `linear-gradient(145deg, ${item.accent}, ${item.tone})`,
                     boxShadow: `0 4px 12px ${item.tone}66`,
                   }}
-                  animate={{ opacity: [0.85, 1, 0.85], y: [0, -2, 0] }}
+                  animate={
+                    lite
+                      ? undefined
+                      : { opacity: [0.85, 1, 0.85], y: [0, -2, 0] }
+                  }
                   transition={{
                     duration: 3 + (i % 3),
                     repeat: Infinity,
@@ -310,7 +313,7 @@ function PhoneScreen({
             </motion.div>
           ))}
         </div>
-        <div className="mt-3 flex justify-around rounded-2xl border border-white/10 bg-black/50 py-2.5 backdrop-blur-sm">
+        <div className="mt-3 flex justify-around rounded-2xl border border-white/10 bg-black/50 py-2.5">
           {["Home", "Closet", "Plan", "You"].map((t, i) => (
             <span
               key={t}
@@ -353,12 +356,12 @@ function PhoneScreen({
         {insightRows.map((row, i) => (
           <motion.div
             key={row.label}
-            className="flex flex-1 items-center gap-3 rounded-xl border border-white/8 bg-white/[0.04] p-2.5 backdrop-blur-sm"
-            initial={{ opacity: 0, x: -12 }}
+            className="flex flex-1 items-center gap-3 rounded-xl border border-white/8 bg-white/[0.04] p-2.5"
+            initial={lite ? false : { opacity: 0, x: -12 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{
-              delay: 0.85 + i * 0.12,
-              duration: 0.5,
+              delay: lite ? 0 : 0.85 + i * 0.12,
+              duration: lite ? 0 : 0.5,
               ease: easeOutExpo,
             }}
           >
@@ -383,10 +386,17 @@ function PhoneScreen({
               <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
                 <motion.div
                   className="h-full rounded-full"
-                  style={{ background: row.color }}
-                  initial={{ width: 0 }}
+                  style={{
+                    background: row.color,
+                    width: lite ? `${55 + i * 15}%` : undefined,
+                  }}
+                  initial={lite ? false : { width: 0 }}
                   animate={{ width: `${55 + i * 15}%` }}
-                  transition={{ delay: 1.1 + i * 0.15, duration: 0.8, ease: easeOutExpo }}
+                  transition={{
+                    delay: lite ? 0 : 1.1 + i * 0.15,
+                    duration: lite ? 0 : 0.8,
+                    ease: easeOutExpo,
+                  }}
                 />
               </div>
             </div>

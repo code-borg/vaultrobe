@@ -15,7 +15,7 @@ export function EasyStart() {
     <section id="start" className="section-band relative py-20 md:py-28">
       <div className="section-divider" />
       <div
-        className="orb orb-gold absolute right-1/4 top-0 h-72 w-72 animate-glow-breathe motion-reduce:animate-none"
+        className="orb orb-gold absolute right-1/4 top-0 hidden h-72 w-72 animate-glow-breathe motion-reduce:animate-none md:block"
         aria-hidden
       />
 

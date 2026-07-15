@@ -19,15 +19,15 @@ export function FinalCta() {
           transition={{ duration: 0.7, ease: easeOutExpo }}
         >
           <div
-            className="orb orb-gold absolute -right-16 -top-16 h-56 w-56 animate-orb-drift motion-reduce:animate-none"
+            className="orb orb-gold absolute -right-16 -top-16 hidden h-56 w-56 animate-orb-drift motion-reduce:animate-none md:block"
             aria-hidden
           />
           <div
-            className="orb orb-emerald absolute -bottom-12 -left-12 h-48 w-48 animate-orb-drift-reverse motion-reduce:animate-none"
+            className="orb orb-emerald absolute -bottom-12 -left-12 hidden h-48 w-48 animate-orb-drift-reverse motion-reduce:animate-none md:block"
             aria-hidden
           />
           <div
-            className="orb orb-rose absolute bottom-0 right-1/4 h-32 w-32 opacity-70"
+            className="orb orb-rose absolute bottom-0 right-1/4 hidden h-32 w-32 opacity-70 md:block"
             aria-hidden
           />
           {/* Soft ring */}

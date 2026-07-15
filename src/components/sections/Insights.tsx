@@ -15,7 +15,7 @@ export function Insights() {
     <section id="insights" className="section-band relative py-20 md:py-28">
       <div className="section-divider" />
       <div
-        className="orb orb-gold absolute right-0 top-1/2 h-80 w-80 -translate-y-1/2 animate-orb-drift motion-reduce:animate-none"
+        className="orb orb-gold absolute right-0 top-1/2 hidden h-80 w-80 -translate-y-1/2 animate-orb-drift motion-reduce:animate-none md:block"
         aria-hidden
       />
 

@@ -582,3 +582,145 @@ footer {
     animation: none !important;
   }
 }
+
+/* ─── Mobile performance ───
+   Desktop GPUs handle glass + blurs + continuous ambient motion well.
+   Mobile browsers (especially Safari) thrash on:
+   - fixed full-viewport filters (noise SVG turbulence)
+   - backdrop-filter on many layers while scrolling
+   - large filter:blur orbs with infinite transforms
+   - smooth scroll + animated fixed layers
+*/
+@media (max-width: 767px) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  /* SVG noise filter is extremely expensive while scrolling */
+  .noise-overlay {
+    display: none !important;
+  }
+
+  /* Freeze fixed atmosphere (no continuous repaint under scroll) */
+  .page-atmosphere::before {
+    animation: none !important;
+    inset: 0;
+  }
+
+  /* Solid-ish glass — skip backdrop blur compositing */
+  .glass,
+  .glass-strong,
+  .glass-gold,
+  .btn-ghost {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .glass {
+    background: rgba(22, 19, 14, 0.96);
+  }
+
+  .glass-strong {
+    background: rgba(18, 15, 11, 0.98);
+  }
+
+  .glass-gold {
+    background: linear-gradient(
+      145deg,
+      rgba(40, 34, 24, 0.98) 0%,
+      rgba(22, 18, 12, 0.98) 45%,
+      rgba(36, 30, 20, 0.98) 100%
+    );
+  }
+
+  .light .glass {
+    background: rgba(255, 255, 255, 0.97);
+  }
+
+  .light .glass-strong {
+    background: rgba(255, 255, 255, 0.99);
+  }
+
+  .light .glass-gold {
+    background: linear-gradient(
+      145deg,
+      rgba(255, 250, 240, 0.99) 0%,
+      rgba(255, 255, 255, 0.99) 45%,
+      rgba(252, 246, 232, 0.99) 100%
+    );
+  }
+
+  /* Large blurred orbs force heavy GPU filter passes */
+  .orb {
+    filter: none;
+    opacity: 0.35;
+    animation: none !important;
+  }
+
+  /* Kill ambient CSS loops site-wide on small screens */
+  .animate-orb-drift,
+  .animate-orb-drift-reverse,
+  .animate-glow-breathe,
+  .animate-float,
+  .animate-float-slow,
+  .animate-float-delayed,
+  .animate-pulse-gold,
+  .animate-shimmer-text,
+  .animate-shimmer,
+  .animate-gradient-shift,
+  .animate-soft-spin {
+    animation: none !important;
+  }
+
+  /* Soften heavy gold glows that repaint on scroll */
+  .shadow-gold,
+  .shadow-gold-lg,
+  .shadow-gold-sm {
+    box-shadow: none;
+  }
+
+  /* Skip tiny decorative blur on dividers */
+  .section-divider::after {
+    filter: none;
+  }
+
+  /* Fixed header: solid surface, no expensive glass composite while scrolling */
+  header.glass-strong,
+  .glass-strong {
+    background: rgba(18, 15, 11, 0.98);
+  }
+
+  .light header.glass-strong,
+  .light .glass-strong {
+    background: rgba(255, 255, 255, 0.99);
+  }
+
+  /* Prefer transform compositing over filter chains */
+  main {
+    isolation: isolate;
+  }
+}
+
+/* Touch devices (tablets in landscape still hurt on blur) */
+@media (hover: none) and (pointer: coarse) {
+  .noise-overlay {
+    display: none !important;
+  }
+
+  .page-atmosphere::before {
+    animation: none !important;
+  }
+
+  .glass,
+  .glass-strong,
+  .glass-gold,
+  .btn-ghost {
+    backdrop-filter: none !important;
+    -webkit-backdrop-filter: none !important;
+  }
+
+  .orb {
+    filter: none;
+    animation: none !important;
+  }
+}
