@@ -12,7 +12,7 @@ export function Outfits() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="outfits" className="section-band section-band-surface relative py-20 md:py-28">
+    <section id="outfits" className="section-band section-band-surface relative py-24 md:py-36">
       <div className="section-divider" />
       <div
         className="orb orb-emerald absolute -left-16 bottom-0 hidden h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none md:block"
@@ -42,8 +42,8 @@ export function Outfits() {
               >
                 <motion.div
                   className={cn(
-                    "mb-4",
-                    item.highlight ? "icon-well icon-well-gold" : "icon-well icon-well-emerald"
+                    "mb-4 icon-well icon-well-lg",
+                    item.highlight ? "icon-well-gold" : "icon-well-emerald"
                   )}
                   whileHover={
                     reduceMotion
@@ -55,7 +55,7 @@ export function Outfits() {
                         }
                   }
                 >
-                  <FeatureIcon name={item.icon} size={22} className="text-current" />
+                  <FeatureIcon name={item.icon} size={26} className="text-current" />
                 </motion.div>
                 <h3 className="mb-2 font-display text-xl text-lux-ivory transition-colors duration-300 group-hover/card:text-lux-gold">
                   {item.title}

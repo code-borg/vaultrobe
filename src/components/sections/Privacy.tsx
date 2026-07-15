@@ -12,7 +12,7 @@ export function Privacy() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="privacy" className="section-band section-band-surface relative py-20 md:py-28">
+    <section id="privacy" className="section-band section-band-privacy relative py-24 md:py-36">
       <div className="section-divider" />
       <div
         className="orb orb-emerald absolute bottom-0 left-1/2 hidden h-[28rem] w-[28rem] -translate-x-1/2 animate-glow-breathe motion-reduce:animate-none md:block"

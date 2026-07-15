@@ -12,7 +12,7 @@ export function Insights() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="insights" className="section-band relative py-20 md:py-28">
+    <section id="insights" className="section-band relative py-24 md:py-36">
       <div className="section-divider" />
       <div
         className="orb orb-gold absolute right-0 top-1/2 hidden h-80 w-80 -translate-y-1/2 animate-orb-drift motion-reduce:animate-none md:block"
@@ -35,16 +35,18 @@ export function Insights() {
               initial="hidden"
               whileInView="show"
               viewport={viewOnceLoose}
-              className={cn(item.highlight && "sm:col-span-2 lg:col-span-1")}
             >
               <GlassCard
                 variant={item.highlight ? "gold" : "default"}
-                className={cn("h-full", item.highlight && "ring-1 ring-lux-gold/25")}
+                className={cn(
+                  "h-full",
+                  item.highlight && "ring-1 ring-lux-gold/25 max-sm:p-7"
+                )}
               >
                 <motion.div
                   className={cn(
-                    "mb-4",
-                    item.highlight ? "icon-well icon-well-gold" : "icon-well"
+                    "mb-4 icon-well icon-well-lg",
+                    item.highlight ? "icon-well-gold" : undefined
                   )}
                   whileHover={
                     reduceMotion
@@ -56,12 +58,24 @@ export function Insights() {
                         }
                   }
                 >
-                  <FeatureIcon name={item.icon} size={22} className="text-current" />
+                  <FeatureIcon name={item.icon} size={26} className="text-current" />
                 </motion.div>
-                <h3 className="mb-2 font-display text-xl text-lux-ivory transition-colors duration-300 group-hover/card:text-lux-gold">
+                <h3
+                  className={cn(
+                    "mb-2 font-display text-lux-ivory transition-colors duration-300 group-hover/card:text-lux-gold",
+                    item.highlight ? "text-xl sm:text-[1.35rem]" : "text-xl"
+                  )}
+                >
                   {item.title}
                 </h3>
-                <p className="text-sm leading-relaxed text-lux-ink-soft">
+                <p
+                  className={cn(
+                    "leading-relaxed text-lux-ink-soft",
+                    item.highlight
+                      ? "text-[0.9375rem] sm:text-sm max-sm:leading-relaxed"
+                      : "text-sm"
+                  )}
+                >
                   {item.description}
                 </p>
                 {item.highlight && (

@@ -54,7 +54,7 @@ export const heroCopy: HeroCopy = {
   headline: "Your wardrobe. Private.",
   headlineAccent: "Thoughtfully intelligent.",
   subheadline:
-    "Vaultrobe helps you spend less time deciding what to wear and more time feeling good in your clothes. See what you actually own, understand how you wear it, and get thoughtful outfit suggestions — all while keeping everything private on your device.",
+    "Vaultrobe helps you spend less time deciding what to wear and more time feeling good in your clothes. See what you actually own, understand how you wear it, and get thoughtful outfit suggestions — all while keeping your wardrobe completely private on your device.",
   chips: [
     { label: "On-device by design", icon: "Shield" },
     { label: "Bulk upload & garment scan", icon: "Upload" },
@@ -97,7 +97,7 @@ export const problemCopy: ProblemCopy = {
     },
   ],
   bridge:
-    "Vaultrobe doesn’t replace your taste. It makes your wardrobe legible — so you can wear what you already own, privately.",
+    "Vaultrobe doesn’t replace your taste. It makes your wardrobe legible — privately.",
 };
 
 export const insightsCopy: InsightsCopy = {
@@ -132,12 +132,12 @@ export const insightsCopy: InsightsCopy = {
       icon: "Layers",
     },
   ],
-  supporting: "Real clarity. Not assumptions.",
+  supporting: "Real clarity. Not guesswork.",
 };
 
 export const outfitsCopy: OutfitsCopy = {
   label: "Outfits",
-  title: "Outfits that fit the day — not a trend feed.",
+  title: "Outfits that fit your day — not a trend feed.",
   subtitle:
     "Smart, weather-aware recommendations shaped by color harmony, formality, and how your pieces work together — refined by the looks you skip.",
   items: [
@@ -153,20 +153,18 @@ export const outfitsCopy: OutfitsCopy = {
     },
     {
       title: "Formality & style coherence",
-      description:
-        "Work, weekend, and evening — without the random clash.",
+      description: "Work, weekend, and evening without the random clash.",
       icon: "Layers",
     },
     {
-      title: "Learns from what you reject",
+      title: "Learns from you",
       description:
         "Every “not today” quietly improves the next suggestion.",
       icon: "ThumbsDown",
     },
     {
       title: "Thoughtful by design",
-      description:
-        "Clear, rule-based intelligence you can trust — not a black-box “stylist” performing for you.",
+      description: "Clear, rule-based intelligence you can trust.",
       icon: "Scale",
       highlight: true,
     },
@@ -207,7 +205,7 @@ export const easyStartCopy: EasyStartCopy = {
       icon: "Users",
     },
   ],
-  supporting: "Beautiful results should not require a weekend.",
+  supporting: "Getting started should not require a weekend.",
 };
 
 export const privacyCopy: PrivacyCopy = {
@@ -240,7 +238,7 @@ export const privacyCopy: PrivacyCopy = {
     },
   ],
   closer:
-    "Privacy isn’t a setting we added later. It’s how Vaultrobe was designed from the start.",
+    "Privacy isn’t a feature we added. It’s how Vaultrobe was built.",
 };
 
 export const gettingStartedCopy: GettingStartedCopy = {

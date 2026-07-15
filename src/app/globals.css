@@ -306,6 +306,31 @@ body {
     );
   }
 
+  /* Privacy differentiator — deeper, more distinct band */
+  .section-band-privacy {
+    background: linear-gradient(
+      180deg,
+      rgb(var(--lux-midnight) / 0.92) 0%,
+      rgb(8 7 6 / 0.95) 45%,
+      rgb(var(--lux-midnight) / 0.88) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgb(var(--lux-gold) / 0.12),
+      inset 0 -1px 0 rgb(var(--lux-gold) / 0.08);
+  }
+
+  .light .section-band-privacy {
+    background: linear-gradient(
+      180deg,
+      rgb(236 228 212 / 0.95) 0%,
+      rgb(228 218 198 / 0.9) 50%,
+      rgb(236 228 212 / 0.95) 100%
+    );
+    box-shadow:
+      inset 0 1px 0 rgb(var(--lux-gold) / 0.18),
+      inset 0 -1px 0 rgb(var(--lux-gold) / 0.1);
+  }
+
   .section-divider {
     pointer-events: none;
     position: absolute;
@@ -352,6 +377,10 @@ body {
       0 0 20px rgb(var(--lux-gold) / 0.1),
       inset 0 1px 0 rgba(255, 255, 255, 0.08);
     color: rgb(var(--lux-gold));
+  }
+
+  .icon-well-lg {
+    @apply h-14 w-14 rounded-[1.15rem];
   }
 
   .icon-well-gold {

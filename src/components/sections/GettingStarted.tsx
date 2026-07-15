@@ -21,7 +21,7 @@ export function GettingStarted() {
   const { photoGuide } = gettingStartedCopy;
 
   return (
-    <section id="getting-started" className="section-band relative py-20 md:py-28">
+    <section id="getting-started" className="section-band relative py-24 md:py-36">
       <div className="section-divider" />
       <div
         className="orb orb-gold absolute left-1/4 top-1/3 hidden h-64 w-64 animate-orb-drift motion-reduce:animate-none md:block"

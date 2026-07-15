@@ -9,7 +9,7 @@ export function FinalCta() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="download" className="relative py-16 md:py-24">
+    <section id="download" className="relative py-20 md:py-32">
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <motion.div
           className="glass-gold relative overflow-hidden rounded-3xl px-6 py-14 text-center sm:px-12 sm:py-20"

@@ -12,7 +12,7 @@ export function EasyStart() {
   const reduceMotion = useReducedMotion();
 
   return (
-    <section id="start" className="section-band relative py-20 md:py-28">
+    <section id="start" className="section-band relative py-24 md:py-36">
       <div className="section-divider" />
       <div
         className="orb orb-gold absolute right-1/4 top-0 hidden h-72 w-72 animate-glow-breathe motion-reduce:animate-none md:block"

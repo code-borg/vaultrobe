@@ -21,7 +21,7 @@ export function Problem() {
   return (
     <section
       id="why"
-      className="section-band section-band-surface relative py-20 md:py-28"
+      className="section-band section-band-surface relative py-24 md:py-36"
     >
       <div className="section-divider" />
       <div

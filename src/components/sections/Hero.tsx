@@ -1,6 +1,12 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import {
+  motion,
+  useReducedMotion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
 import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 import { heroCopy } from "@/lib/landing-copy";
@@ -19,11 +25,40 @@ const closetItems = [
 
 export function Hero() {
   const lite = useLiteMotion();
+  const reduceMotion = useReducedMotion();
+  const mockupRef = useRef<HTMLDivElement>(null);
+
+  const { scrollYProgress } = useScroll({
+    target: mockupRef,
+    offset: ["start end", "end start"],
+  });
+
+  const scrollEnabled = !lite && !reduceMotion;
+  const primaryY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    scrollEnabled ? [28, 0, -36] : [0, 0, 0]
+  );
+  const secondaryY = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    scrollEnabled ? [16, 0, -22] : [0, 0, 0]
+  );
+  const primaryRotate = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    scrollEnabled ? [1.5, 0, -1.2] : [0, 0, 0]
+  );
+  const secondaryRotate = useTransform(
+    scrollYProgress,
+    [0, 0.5, 1],
+    scrollEnabled ? [-10, -8, -6] : [-8, -8, -8]
+  );
 
   return (
     <section
       id="top"
-      className="relative min-h-screen overflow-hidden pt-28 pb-20 sm:pt-32 md:pt-36 md:pb-28"
+      className="relative min-h-screen overflow-hidden pt-28 pb-24 sm:pt-32 md:pt-36 md:pb-32"
     >
       <div
         className="pointer-events-none absolute inset-0 bg-radial-glow"
@@ -171,7 +206,8 @@ export function Hero() {
         </div>
 
         <motion.div
-          className="relative mx-auto flex w-full max-w-[280px] justify-center sm:max-w-md lg:max-w-none"
+          ref={mockupRef}
+          className="relative mx-auto flex w-full max-w-[300px] justify-center sm:max-w-lg lg:max-w-none"
           initial={lite ? false : { opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{
@@ -181,38 +217,49 @@ export function Hero() {
           }}
         >
           {/* Mobile: single centered phone. sm+: dual floating composition */}
-          <div className="relative mx-auto h-[500px] w-full sm:h-[540px] md:h-[580px]">
+          <div className="relative mx-auto h-[540px] w-full sm:h-[600px] md:h-[640px]">
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lux-gold/15 shadow-gold animate-glow-breathe motion-reduce:animate-none sm:block sm:h-80 sm:w-80 md:h-96 md:w-96"
+              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full border border-lux-gold/15 shadow-gold animate-glow-breathe motion-reduce:animate-none sm:block sm:h-[22rem] sm:w-[22rem] md:h-[26rem] md:w-[26rem]"
               aria-hidden
             />
             <div
-              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-44 w-44 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(232,196,110,0.2),transparent_70%)] blur-2xl sm:block sm:h-56 sm:w-56"
+              className="pointer-events-none absolute left-1/2 top-1/2 hidden h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[radial-gradient(circle,rgba(232,196,110,0.2),transparent_70%)] blur-2xl sm:block sm:h-60 sm:w-60"
               aria-hidden
             />
 
             {/* Secondary phone — desktop/tablet only (avoids cramped overlap on mobile) */}
             <motion.div
-              className="phone-frame absolute left-0 top-10 hidden w-[180px] opacity-75 sm:block sm:w-[200px] md:left-4 md:w-[220px]"
-              style={{ rotate: -8 }}
-              animate={
-                lite ? undefined : { y: [0, -10, 0], rotate: [-8, -6, -8] }
-              }
-              transition={{
-                duration: 7,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              className="absolute left-0 top-8 hidden w-[200px] sm:block sm:w-[220px] md:left-2 md:w-[245px]"
+              style={{ y: secondaryY, rotate: secondaryRotate }}
             >
-              <PhoneScreen variant="insights" label="Insights" lite={lite} />
+              <motion.div
+                className="phone-frame w-full opacity-80"
+                animate={
+                  lite || reduceMotion
+                    ? undefined
+                    : { y: [0, -12, 0] }
+                }
+                transition={{
+                  duration: 7,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+              >
+                <PhoneScreen variant="insights" label="Insights" lite={lite} />
+              </motion.div>
             </motion.div>
 
             {/* Primary phone — centered on mobile, right-stacked from sm up */}
-            <div className="absolute left-1/2 top-2 z-10 w-[220px] -translate-x-1/2 sm:left-auto sm:right-0 sm:top-0 sm:w-[230px] sm:translate-x-0 md:right-8 md:w-[250px]">
+            <motion.div
+              className="absolute left-1/2 top-1 z-10 w-[240px] -translate-x-1/2 sm:left-auto sm:right-0 sm:top-0 sm:w-[255px] sm:translate-x-0 md:right-4 md:w-[280px]"
+              style={{ y: primaryY, rotate: primaryRotate }}
+            >
               <motion.div
                 className="phone-frame w-full shadow-gold-lg"
                 animate={
-                  lite ? undefined : { y: [0, -10, 0], rotate: [0, 1.2, 0] }
+                  lite || reduceMotion
+                    ? undefined
+                    : { y: [0, -12, 0] }
                 }
                 transition={{
                   duration: 5.5,
@@ -224,13 +271,13 @@ export function Hero() {
                 <div className="absolute left-1/2 top-3 z-20 h-5 w-20 -translate-x-1/2 rounded-full bg-black/80" />
                 <PhoneScreen variant="closet" label="Closet" lite={lite} />
               </motion.div>
-            </div>
+            </motion.div>
 
-            <div className="absolute bottom-4 left-1/2 z-20 -translate-x-1/2 sm:bottom-8 sm:left-auto sm:right-0 sm:translate-x-0">
+            <div className="absolute bottom-2 left-1/2 z-20 -translate-x-1/2 sm:bottom-6 sm:left-auto sm:right-0 sm:translate-x-0">
               <motion.div
                 className="glass rounded-2xl px-4 py-3"
                 animate={
-                  lite
+                  lite || reduceMotion
                     ? undefined
                     : {
                         y: [0, -6, 0],
