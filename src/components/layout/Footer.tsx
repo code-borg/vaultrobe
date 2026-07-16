@@ -1,15 +1,9 @@
-"use client";
-
-import { motion } from "framer-motion";
-import { Heart } from "lucide-react";
 import { BrandLogo } from "@/components/icons/BrandLogo";
 import { siteConfig } from "@/lib/data";
 import { footerCopy } from "@/lib/landing-copy";
-import { useLiteMotion } from "@/lib/use-lite-motion";
 
 export function Footer() {
   const year = new Date().getFullYear();
-  const lite = useLiteMotion();
 
   return (
     <footer className="relative border-t border-lux-gold/10 pb-10 pt-14">
@@ -58,24 +52,9 @@ export function Footer() {
           </nav>
         </div>
 
-        <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-subtle pt-8 text-xs text-lux-ink-faint sm:flex-row">
+        <div className="mt-12 border-t border-subtle pt-8 text-center text-xs text-lux-ink-faint sm:text-left">
           <p>
             © {year} {siteConfig.name}. All rights reserved.
-          </p>
-          <p className="flex items-center gap-1.5">
-            Made with{" "}
-            <motion.span
-              className="inline-flex"
-              animate={lite ? undefined : { scale: [1, 1.25, 1] }}
-              transition={{ duration: 1.2, repeat: Infinity, ease: "easeInOut" }}
-            >
-              <Heart
-                size={12}
-                className="text-lux-rose-gold"
-                fill="currentColor"
-              />
-            </motion.span>{" "}
-            {footerCopy.madeFor}
           </p>
         </div>
       </div>

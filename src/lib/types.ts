@@ -197,7 +197,6 @@ export interface FinalCtaCopy {
 export interface FooterCopy {
   tagline: string;
   productLinks: LandingNavLink[];
-  madeFor: string;
 }
 
 export interface SeoCopy {

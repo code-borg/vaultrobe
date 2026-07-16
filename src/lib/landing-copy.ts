@@ -318,7 +318,6 @@ export const footerCopy: FooterCopy = {
     { href: "#start", label: "Easy start" },
     { href: "#privacy", label: "Privacy" },
   ],
-  madeFor: "for people who love what they wear — privately",
 };
 
 /** Feature list for structured data (concise product capabilities). */
