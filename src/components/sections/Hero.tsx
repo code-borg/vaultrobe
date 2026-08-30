@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef } from "react";
+import Image from "next/image";
 import {
   motion,
   useReducedMotion,
@@ -14,15 +15,6 @@ import { FeatureIcon } from "@/components/icons/FeatureIcon";
 import { HeroSilk } from "@/components/effects/HeroSilk";
 import { easeOutExpo, fadeUp } from "@/lib/motion";
 import { useLiteMotion } from "@/lib/use-lite-motion";
-
-const closetItems = [
-  { name: "Linen shirt", tone: "#C9A96E", accent: "#E8D4A0" },
-  { name: "Navy knit", tone: "#3D4F6F", accent: "#6B82A8" },
-  { name: "Rose silk", tone: "#B76E79", accent: "#D4A0A8" },
-  { name: "Olive coat", tone: "#5C6B4A", accent: "#8FA078" },
-  { name: "Cream tee", tone: "#D4C4A8", accent: "#F0E6D0" },
-  { name: "Charcoal", tone: "#4A4540", accent: "#7A736C" },
-];
 
 export function Hero() {
   const lite = useLiteMotion();
@@ -236,7 +228,7 @@ export function Hero() {
               style={{ y: secondaryY, rotate: secondaryRotate }}
             >
               <motion.div
-                className="phone-frame w-full opacity-80"
+                className="phone-frame w-full opacity-90"
                 animate={
                   lite || reduceMotion
                     ? undefined
@@ -248,7 +240,11 @@ export function Hero() {
                   ease: "easeInOut",
                 }}
               >
-                <PhoneScreen variant="insights" label="Insights" lite={lite} />
+                <PhoneScreenshot
+                  src="/screenshots/analytics.jpg"
+                  alt="Vaultrobe wardrobe analytics: category breakdown, color palette, and most-worn items"
+                  priority
+                />
               </motion.div>
             </motion.div>
 
@@ -271,8 +267,11 @@ export function Hero() {
                   delay: 0.4,
                 }}
               >
-                <div className="absolute left-1/2 top-3 z-20 h-5 w-20 -translate-x-1/2 rounded-full bg-black/80" />
-                <PhoneScreen variant="closet" label="Closet" lite={lite} />
+                <PhoneScreenshot
+                  src="/screenshots/closet.jpg"
+                  alt="Vaultrobe closet grid with scanned garments, categories, and laundry tools"
+                  priority
+                />
               </motion.div>
             </motion.div>
 
@@ -302,157 +301,25 @@ export function Hero() {
   );
 }
 
-function PhoneScreen({
-  variant,
-  label,
-  lite = false,
+function PhoneScreenshot({
+  src,
+  alt,
+  priority = false,
 }: {
-  variant: "closet" | "insights";
-  label: string;
-  lite?: boolean;
+  src: string;
+  alt: string;
+  priority?: boolean;
 }) {
-  if (variant === "closet") {
-    return (
-      <div className="flex aspect-[9/19] flex-col bg-gradient-to-b from-[#1f1b14] via-[#15120e] to-[#0c0a08] p-4 pt-10">
-        <div className="mb-3 flex items-center justify-between">
-          <span className="font-display text-sm text-lux-ivory">{label}</span>
-          <span className="rounded-full bg-lux-gold/20 px-2 py-0.5 text-[10px] font-medium text-lux-gold shadow-gold-sm animate-pulse-gold motion-reduce:animate-none">
-            Yours
-          </span>
-        </div>
-        <div className="grid flex-1 grid-cols-2 content-start gap-2">
-          {closetItems.map((item, i) => (
-            <motion.div
-              key={item.name}
-              className="aspect-square overflow-hidden rounded-xl border border-white/10"
-              style={{
-                background: `linear-gradient(145deg, ${item.accent}33 0%, ${item.tone}55 40%, #0e0c0a 100%)`,
-              }}
-              initial={lite ? false : { opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{
-                delay: lite ? 0 : 0.7 + i * 0.08,
-                duration: lite ? 0 : 0.45,
-                ease: easeOutExpo,
-              }}
-            >
-              <div className="flex h-full flex-col items-center justify-end p-2.5">
-                <motion.div
-                  className="mb-1.5 h-9 w-9 rounded-full shadow-md"
-                  style={{
-                    background: `linear-gradient(145deg, ${item.accent}, ${item.tone})`,
-                    boxShadow: `0 4px 12px ${item.tone}66`,
-                  }}
-                  animate={
-                    lite
-                      ? undefined
-                      : { opacity: [0.85, 1, 0.85], y: [0, -2, 0] }
-                  }
-                  transition={{
-                    duration: 3 + (i % 3),
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                    delay: i * 0.25,
-                  }}
-                />
-                <div className="h-1 w-12 rounded-full bg-white/15" />
-                <p className="mt-1 truncate text-[8px] text-white/50">
-                  {item.name}
-                </p>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-        <div className="mt-3 flex justify-around rounded-2xl border border-white/10 bg-black/50 py-2.5">
-          {["Home", "Closet", "Plan", "You"].map((t, i) => (
-            <span
-              key={t}
-              className={`text-[9px] ${i === 1 ? "font-medium text-lux-gold" : "text-white/40"}`}
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      </div>
-    );
-  }
-
-  const insightRows = [
-    {
-      label: "Never worn",
-      meta: "12 pieces",
-      color: "#B76E79",
-      icon: "Shirt",
-    },
-    {
-      label: "Color balance",
-      meta: "Warm bias",
-      color: "#C9A96E",
-      icon: "Palette",
-    },
-    {
-      label: "Most worn",
-      meta: "Navy knit",
-      color: "#81C784",
-      icon: "History",
-    },
-  ];
-
   return (
-    <div className="flex aspect-[9/19] flex-col bg-gradient-to-b from-[#1f1b14] via-[#15120e] to-[#0c0a08] p-4 pt-10">
-      <span className="mb-1 font-display text-sm text-lux-ivory">{label}</span>
-      <p className="mb-3 text-[10px] text-white/40">This month</p>
-      <div className="flex flex-1 flex-col gap-2.5">
-        {insightRows.map((row, i) => (
-          <motion.div
-            key={row.label}
-            className="flex flex-1 items-center gap-3 rounded-xl border border-white/8 bg-white/[0.04] p-2.5"
-            initial={lite ? false : { opacity: 0, x: -12 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{
-              delay: lite ? 0 : 0.85 + i * 0.12,
-              duration: lite ? 0 : 0.5,
-              ease: easeOutExpo,
-            }}
-          >
-            <div
-              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-lg"
-              style={{
-                background: `linear-gradient(145deg, ${row.color}33, ${row.color}12)`,
-                border: `1px solid ${row.color}40`,
-              }}
-            >
-              <FeatureIcon
-                name={row.icon}
-                size={16}
-                className="text-white/80"
-              />
-            </div>
-            <div className="min-w-0 flex-1">
-              <p className="truncate text-[11px] font-medium text-white/90">
-                {row.label}
-              </p>
-              <p className="truncate text-[9px] text-white/40">{row.meta}</p>
-              <div className="mt-1.5 h-1 overflow-hidden rounded-full bg-white/10">
-                <motion.div
-                  className="h-full rounded-full"
-                  style={{
-                    background: row.color,
-                    width: lite ? `${55 + i * 15}%` : undefined,
-                  }}
-                  initial={lite ? false : { width: 0 }}
-                  animate={{ width: `${55 + i * 15}%` }}
-                  transition={{
-                    delay: lite ? 0 : 1.1 + i * 0.15,
-                    duration: lite ? 0 : 0.8,
-                    ease: easeOutExpo,
-                  }}
-                />
-              </div>
-            </div>
-          </motion.div>
-        ))}
-      </div>
+    <div className="relative aspect-[9/19.5] w-full bg-[#F7F2E8]">
+      <Image
+        src={src}
+        alt={alt}
+        fill
+        sizes="(max-width: 640px) 240px, (max-width: 768px) 255px, 280px"
+        className="object-cover object-top"
+        priority={priority}
+      />
     </div>
   );
 }

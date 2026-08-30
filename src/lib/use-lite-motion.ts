@@ -3,25 +3,17 @@
 import { useEffect, useState } from "react";
 import { useReducedMotion } from "framer-motion";
 
-function isConstrainedViewport(): boolean {
-  if (typeof window === "undefined") return true;
-  return (
-    window.matchMedia("(max-width: 767px)").matches ||
-    window.matchMedia("(hover: none) and (pointer: coarse)").matches
-  );
-}
-
 /**
  * True when motion should be simplified: user prefers reduced motion,
  * or we're on a narrow / touch-first viewport where continuous animations
  * and layout thrashing cause scroll jank.
  *
- * Defaults to constrained on SSR so mobile never mounts infinite loops
- * before the media query resolves.
+ * Always starts constrained so SSR and the first client render match.
+ * The real viewport is applied after mount.
  */
 export function useLiteMotion(): boolean {
   const reduceMotion = useReducedMotion();
-  const [isConstrained, setIsConstrained] = useState(isConstrainedViewport);
+  const [isConstrained, setIsConstrained] = useState(true);
 
   useEffect(() => {
     const narrow = window.matchMedia("(max-width: 767px)");
