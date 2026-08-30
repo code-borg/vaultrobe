@@ -11,6 +11,7 @@ import { ArrowRight } from "lucide-react";
 import { siteConfig } from "@/lib/data";
 import { heroCopy } from "@/lib/landing-copy";
 import { FeatureIcon } from "@/components/icons/FeatureIcon";
+import { HeroSilk } from "@/components/effects/HeroSilk";
 import { easeOutExpo, fadeUp } from "@/lib/motion";
 import { useLiteMotion } from "@/lib/use-lite-motion";
 
@@ -60,26 +61,28 @@ export function Hero() {
       id="top"
       className="relative min-h-screen overflow-hidden pt-28 pb-24 sm:pt-32 md:pt-36 md:pb-32"
     >
+      <HeroSilk />
       <div
-        className="pointer-events-none absolute inset-0 bg-radial-glow"
+        className="pointer-events-none absolute inset-0 z-[1] bg-radial-glow"
         aria-hidden
       />
-      {/* Ambient orbs — hidden on small screens (CSS); heavy blur filters jank mobile scroll */}
+      {/* Ambient orbs — CSS fallback when WebGPU is unavailable. Hidden on
+          small screens; heavy blur filters jank mobile scroll. */}
       <div
-        className="orb orb-emerald absolute -right-24 top-1/4 hidden h-[420px] w-[420px] animate-orb-drift motion-reduce:animate-none md:block"
+        className="orb orb-emerald absolute -right-24 top-1/4 z-0 hidden h-[420px] w-[420px] animate-orb-drift motion-reduce:animate-none md:block"
         aria-hidden
       />
       <div
-        className="orb orb-rose absolute -left-16 bottom-0 hidden h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none md:block"
+        className="orb orb-rose absolute -left-16 bottom-0 z-0 hidden h-80 w-80 animate-orb-drift-reverse motion-reduce:animate-none md:block"
         aria-hidden
       />
       <div
-        className="orb orb-gold absolute left-1/2 top-16 hidden h-72 w-72 -translate-x-1/2 animate-glow-breathe motion-reduce:animate-none md:block"
+        className="orb orb-gold absolute left-1/2 top-16 z-0 hidden h-72 w-72 -translate-x-1/2 animate-glow-breathe motion-reduce:animate-none md:block"
         aria-hidden
       />
       {/* Soft grid texture — desktop only (mask + fine lines cost mobile paint) */}
       <div
-        className="pointer-events-none absolute inset-0 hidden opacity-[0.035] md:block"
+        className="pointer-events-none absolute inset-0 z-[1] hidden opacity-[0.035] md:block"
         style={{
           backgroundImage:
             "linear-gradient(rgb(232 196 110 / 0.4) 1px, transparent 1px), linear-gradient(90deg, rgb(232 196 110 / 0.4) 1px, transparent 1px)",
@@ -90,7 +93,7 @@ export function Hero() {
         aria-hidden
       />
 
-      <div className="relative mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
+      <div className="relative z-10 mx-auto grid max-w-6xl items-center gap-12 px-5 sm:px-8 lg:grid-cols-2 lg:gap-16">
         <div className="flex flex-col items-start">
           <motion.div
             custom={0}
