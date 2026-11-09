@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Cormorant_Garamond, DM_Sans } from "next/font/google";
 import { ThemeProvider } from "@/components/providers/ThemeProvider";
+import { MotionProvider } from "@/components/providers/MotionProvider";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/data";
 import { seoCopy } from "@/lib/landing-copy";
@@ -104,7 +105,7 @@ export default function RootLayout({
         <ThemeProvider>
           <div className="page-atmosphere" aria-hidden />
           <div className="noise-overlay" aria-hidden />
-          {children}
+          <MotionProvider>{children}</MotionProvider>
         </ThemeProvider>
       </body>
     </html>

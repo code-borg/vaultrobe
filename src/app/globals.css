@@ -594,6 +594,158 @@ footer {
   z-index: 1;
 }
 
+/* Screenshot baseline. Motion changes the entrance, never the resting layout. */
+.editorial-hero {
+  --hero-ease: cubic-bezier(0.22, 1, 0.36, 1);
+  background: rgb(var(--lux-bg));
+}
+.hero-headline {
+  font-size: clamp(3rem, 5.3vw, 4.75rem);
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+.hero-type-mask {
+  display: block;
+  overflow: hidden;
+  padding-block: 0.15em;
+  margin-block: -0.15em;
+}
+.hero-type-mask + .hero-type-mask { margin-top: 0.16em; }
+.hero-type-reveal { display: block; }
+.hero-phone {
+  position: relative;
+  padding: 5px;
+  border: 1px solid #a29b90;
+  border-radius: 38px;
+  background: linear-gradient(100deg, #c5beb1 0%, #eee9df 1%, #8a8378 2%, #181817 4%, #111110 96%, #726c63 98%, #d8d1c6 100%);
+  box-shadow:
+    inset 0 0 0 1px #e9e4da,
+    inset 0 0 0 3px #292724,
+    1px 2px 3px rgba(0, 0, 0, 0.12),
+    8px 18px 28px -14px rgba(0, 0, 0, 0.24),
+    20px 36px 64px -26px rgba(0, 0, 0, 0.18);
+}
+.hero-phone-screen { border-radius: 32px; box-shadow: 0 0 0 1px #080808; }
+.hero-phone-screen::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: linear-gradient(115deg, rgba(255, 255, 255, 0.08), transparent 28%, transparent 78%, rgba(255, 255, 255, 0.025));
+  pointer-events: none;
+}
+.hero-phone-secondary {
+  box-shadow:
+    inset 0 0 0 1px #e9e4da,
+    inset 0 0 0 3px #292724,
+    2px 6px 12px -6px rgba(0, 0, 0, 0.18),
+    10px 22px 40px -22px rgba(0, 0, 0, 0.2);
+}
+.hero-phone::before,
+.hero-phone::after {
+  content: '';
+  position: absolute;
+  width: 3px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, #625d55, #d7d0c3, #7f786e);
+  pointer-events: none;
+}
+.hero-phone::before {
+  left: -3px;
+  top: 18%;
+  height: 6%;
+  box-shadow: 0 46px 0 #aaa295;
+}
+.hero-phone::after { right: -3px; top: 28%; height: 9%; }
+/* A fixed shadow fades with the phone; no animated blur or box-shadow. */
+.hero-actions .btn-gold,
+.hero-actions .btn-ghost {
+  transition-property: color, background-color, border-color, transform;
+  transition-duration: 300ms;
+}
+.hero-actions .btn-gold:hover,
+.hero-actions .btn-ghost:hover { transform: none; }
+.hero-actions .btn-gold::after { display: none; }
+.hero-actions .btn-gold,
+.hero-actions .btn-gold:hover,
+.editorial-header .btn-gold,
+.editorial-header .btn-gold:hover {
+  box-shadow: 0 4px 12px rgb(var(--lux-gold) / 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+.hero-actions .btn-ghost,
+.hero-actions .btn-ghost:hover { box-shadow: none; }
+.hero-actions svg { transition: transform 300ms var(--hero-ease); }
+.editorial-nav-link { position: relative; }
+.editorial-nav-link::after {
+  content: '';
+  position: absolute;
+  left: 1rem;
+  right: 1rem;
+  bottom: 0.35rem;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.editorial-nav-link:hover::after,
+.editorial-nav-link:focus-visible::after { transform: scaleX(1); }
+.editorial-header .btn-gold {
+  transition-property: color, background-color, border-color;
+  transition-duration: 300ms;
+}
+.editorial-header .btn-gold:hover { transform: none; }
+.editorial-header .btn-gold::after { display: none; }
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .hero-primary-cta:hover svg,
+  .hero-primary-cta:focus-visible svg { transform: translateX(3px); }
+}
+/* Finite CSS entrances work without hydration. Interactive elements are never
+   hidden or disabled: their emphasis settles while the composition reveals. */
+@media (prefers-reduced-motion: no-preference) {
+  .editorial-header { animation: hero-control-settle 300ms ease-out backwards; }
+  .hero-eyebrow { animation: hero-support-reveal 500ms var(--hero-ease) 60ms backwards; }
+  .hero-type-reveal { animation: hero-type-reveal 800ms var(--hero-ease) 100ms backwards; }
+  .hero-type-accent { animation-duration: 850ms; animation-delay: 200ms; }
+  .hero-description { animation: hero-support-reveal 600ms var(--hero-ease) 280ms backwards; }
+  .hero-actions { animation: hero-control-settle 300ms var(--hero-ease) 340ms backwards; }
+  .hero-micro { animation: hero-support-reveal 500ms var(--hero-ease) 400ms backwards; }
+  .hero-phone-reveal { animation: hero-product-reveal 1000ms var(--hero-ease) 380ms backwards; }
+  .hero-phone-secondary { animation-delay: 440ms; }
+  .hero-feature { animation: hero-support-reveal 500ms var(--hero-ease) backwards; }
+  /* Tabbing or clicking never follows a moving interactive element. */
+  .editorial-header:focus-within,
+  .hero-actions:focus-within { animation: none; }
+}
+@keyframes hero-type-reveal {
+  from { transform: translateY(105%); }
+  to { transform: translateY(0); }
+}
+@keyframes hero-support-reveal {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes hero-control-settle {
+  from { opacity: 0.8; }
+  to { opacity: 1; }
+}
+@keyframes hero-product-reveal {
+  from { opacity: 0.35; transform: translateX(24px) scale(0.96); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@media (max-width: 767px) {
+  .hero-phone-reveal { animation-name: hero-product-reveal-mobile; }
+}
+@keyframes hero-product-reveal-mobile {
+  from { opacity: 0.5; transform: translateX(12px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .editorial-header,
+  .editorial-hero *,
+  .editorial-nav-link::after { animation: none !important; transition: none !important; }
+}
+
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   html {

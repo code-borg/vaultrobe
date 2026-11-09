@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { Menu, X, Moon, Sun, Smartphone } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
 import { BrandLogo } from "@/components/icons/BrandLogo";
@@ -12,6 +12,7 @@ import { cn } from "@/lib/cn";
 
 export function Header() {
   const { theme, toggle } = useTheme();
+  const reduceMotion = useReducedMotion();
   const [scrolled, setScrolled] = useState(false);
   const [open, setOpen] = useState(false);
 
@@ -39,11 +40,9 @@ export function Header() {
 
   return (
     <motion.header
-      initial={{ y: -24, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
+      initial={false}
       className={cn(
-        "fixed inset-x-0 top-0 z-40 transition-all duration-300",
+        "editorial-header fixed inset-x-0 top-0 z-40 transition-all duration-300",
         scrolled || open
           ? "glass-strong py-3 shadow-[0_8px_32px_rgba(0,0,0,0.25)]"
           : "bg-transparent py-5"
@@ -57,8 +56,7 @@ export function Header() {
         >
           <motion.span
             className="inline-flex"
-            whileHover={{ scale: 1.08, rotate: -4 }}
-            whileTap={{ scale: 0.96 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.99 }}
           >
             <BrandLogo size={40} title="" />
           </motion.span>
@@ -69,18 +67,14 @@ export function Header() {
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <motion.div
-              key={link.href}
-              whileHover={{ y: -1 }}
-              transition={{ type: "spring", stiffness: 400, damping: 25 }}
-            >
+            <div key={link.href}>
               <Link
                 href={link.href}
-                className="block rounded-full px-4 py-2 text-sm font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
+                className="editorial-nav-link block rounded-full px-4 py-2 text-sm font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
               >
                 {link.label}
               </Link>
-            </motion.div>
+            </div>
           ))}
         </nav>
 
@@ -90,16 +84,16 @@ export function Header() {
             onClick={toggle}
             aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} mode`}
             className="flex h-10 w-10 items-center justify-center rounded-full border border-lux-gold/20 text-lux-gold transition hover:bg-lux-gold/10"
-            whileHover={{ scale: 1.08, rotate: 12 }}
-            whileTap={{ scale: 0.92 }}
+            whileHover={reduceMotion ? undefined : { scale: 1.03 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.98 }}
           >
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={theme}
-                initial={{ opacity: 0, rotate: -90, scale: 0.6 }}
-                animate={{ opacity: 1, rotate: 0, scale: 1 }}
-                exit={{ opacity: 0, rotate: 90, scale: 0.6 }}
-                transition={{ duration: 0.25 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: reduceMotion ? 0 : 0.25 }}
                 className="inline-flex"
               >
                 {theme === "dark" ? <Sun size={18} /> : <Moon size={18} />}
@@ -112,8 +106,7 @@ export function Header() {
             target="_blank"
             rel="noopener noreferrer"
             className="btn-gold hidden sm:inline-flex !px-5 !py-2.5 text-xs"
-            whileHover={{ scale: 1.04, y: -1 }}
-            whileTap={{ scale: 0.98 }}
+            whileTap={reduceMotion ? undefined : { scale: 0.99 }}
           >
             <Smartphone size={16} />
             {heroCopy.primaryCta.label}
@@ -137,7 +130,7 @@ export function Header() {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: [0.22, 1, 0.36, 1] }}
+            transition={{ duration: reduceMotion ? 0 : 0.3, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden border-t border-lux-gold/10 md:hidden"
           >
             <div className="flex flex-col gap-1 px-5 py-4">
@@ -146,7 +139,7 @@ export function Header() {
                   key={link.href}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.05 + i * 0.05 }}
+                  transition={{ duration: reduceMotion ? 0 : 0.3, delay: reduceMotion ? 0 : 0.05 + i * 0.05 }}
                 >
                   <Link
                     href={link.href}
@@ -165,7 +158,7 @@ export function Header() {
                 onClick={() => setOpen(false)}
                 initial={{ opacity: 0, y: 8 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.25 }}
+                transition={{ duration: reduceMotion ? 0 : 0.3, delay: reduceMotion ? 0 : 0.25 }}
               >
                 <Smartphone size={16} />
                 {heroCopy.primaryCta.label}

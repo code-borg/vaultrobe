@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<!-- Built with Bang Motion v1.19.0 by Bang Tutorial, MIT.
+     https://github.com/bangtutorial/bang-motion
+     Structure: continuous product shot · one world / three beats · the original
+     wardrobe phone persists · interface macro opening · brand/headline closing.
+     Palette: #F7F2E8 ivory, #120E0A ink, #826018 gold, from globals.css light tokens.
+     Type: the site's Cormorant Garamond + DM Sans. Assets: existing app screenshots.
+     Adapted from starter-opener.html: stage/world rig, absolute GSAP timeline,
+     deterministic seek, fit, debug scrubber, clean export, keyboard playback.
+     No Three.js, invented UI, audio, particles, or scene-swapping sections. -->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="color-scheme" content="light">
+  <title>Vaultrobe — Continuous Product Shot</title>
+  <script>document.documentElement.classList.add('has-js');</script>
+  <style>
+    @font-face{font-family:Display;src:url(display.woff2) format('woff2');font-weight:400 700;font-display:swap}
+    @font-face{font-family:Sans;src:url(sans.woff2) format('woff2');font-weight:400 700;font-display:swap}
+    *{box-sizing:border-box}
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#f7f2e8;color:#120e0a;font-family:Sans,system-ui,sans-serif}
+    #stage{position:fixed;left:50%;top:50%;width:1920px;height:1080px;overflow:hidden;background:#f7f2e8;transform-origin:50% 50%}
+    .has-js #stage{visibility:hidden}
+    #world{position:absolute;inset:0;transform-origin:0 0}
+    #paper-light{position:absolute;inset:-200px;background:radial-gradient(ellipse at 70% 40%,#fffdf8 0%,#f7f2e8 62%);pointer-events:none}
+    .phone{position:absolute;padding:6px;border:1px solid #a29b90;border-radius:44px;background:linear-gradient(100deg,#c5beb1,#eee9df 1%,#8a8378 2%,#181817 4%,#111110 96%,#726c63 98%,#d8d1c6);box-shadow:inset 0 0 0 1px #e9e4da,inset 0 0 0 3px #292724,1px 2px 3px #0002,8px 18px 28px -14px #0004,20px 36px 64px -26px #0003}
+    .phone img{display:block;width:100%;height:auto;border-radius:37px;box-shadow:0 0 0 1px #080808}
+    .phone::before,.phone::after{content:'';position:absolute;width:4px;border-radius:2px;background:linear-gradient(90deg,#625d55,#d7d0c3,#7f786e);pointer-events:none}
+    .phone::before{left:-4px;top:18%;height:6%;box-shadow:0 60px 0 #aaa295}
+    .phone::after{right:-4px;top:28%;height:9%}
+    #closet{left:1350px;top:95px;width:375px;z-index:2}
+    #analytics{left:1110px;top:220px;width:305px;transform:rotate(-5deg);z-index:1;box-shadow:inset 0 0 0 1px #e9e4da,inset 0 0 0 3px #292724,2px 6px 12px -6px #0003,10px 22px 40px -22px #0003}
+    #brand{position:absolute;left:130px;top:108px;display:flex;align-items:center;gap:22px;font-family:Display,Georgia,serif;font-size:48px}
+    #brand img{width:62px;height:62px}
+    #copy{position:absolute;left:130px;top:280px;width:940px}
+    h1{margin:0;font-family:Display,Georgia,serif;font-size:112px;line-height:1.02;font-weight:500;letter-spacing:-3px}
+    .mask{display:block;overflow:hidden;padding:.15em 0;margin:-.15em 0}
+    .line{display:block}
+    .film-ready #brand,.film-ready #analytics,.film-ready #cta{opacity:0}
+    .film-ready .line{transform:translateY(110%)}
+    .accent{color:#826018;font-style:italic;margin-top:20px;font-size:104px;line-height:1.05}
+    #cta{position:absolute;left:130px;top:870px;display:inline-flex;align-items:center;gap:22px;border-radius:50px;padding:25px 38px;background:linear-gradient(135deg,#d4a82e,#b88918 50%,#966e10);color:#fffdf5;font-size:22px;font-weight:600;text-decoration:none;box-shadow:0 8px 26px #82601822}
+    #cta svg{width:23px;height:23px}
+    :focus-visible{outline:3px solid #826018;outline-offset:7px}
+    /* Safe finished composition without JS or when the runtime fails. */
+    #review{display:none;position:fixed;bottom:12px;left:50%;transform:translateX(-50%);width:min(640px,calc(100% - 24px));padding:12px;gap:10px;align-items:center;background:#120e0aee;color:#fffaf0;border-radius:8px;font-size:12px;z-index:10}
+    #review.on{display:flex}
+    #review button{background:#f7f2e8;color:#120e0a;border:0;border-radius:4px;padding:8px 12px;min-height:38px;cursor:pointer}
+    #scrub{flex:1;min-width:50px;accent-color:#d4a82e}
+    #clock{font-variant-numeric:tabular-nums;min-width:45px}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+  <noscript><style>
+    html,body{overflow:auto}
+    #stage{position:relative;left:0;top:0;width:auto;height:auto;min-height:100vh;padding:32px 24px}
+    #world{position:relative;display:grid;grid-template-columns:1fr 1fr;gap:24px;max-width:1000px;margin:auto}
+    #paper-light{display:none}
+    #brand,#copy,#cta,.phone{position:relative;left:auto;top:auto;width:auto}
+    #brand,#copy,#cta{grid-column:1/-1}
+    #brand{font-size:32px}#brand img{width:42px;height:42px}
+    #closet,#analytics{left:auto;top:auto;width:min(100%,280px);margin:auto;transform:none}
+    #copy{grid-row:2}h1{font-size:clamp(40px,7vw,80px);letter-spacing:-1px}.accent{font-size:inherit}
+    #cta{justify-self:start;font-size:16px;padding:18px 26px}
+  </style></noscript>
+</head>
+<body>
+  <main id="stage" aria-label="Vaultrobe wardrobe product film">
+    <div id="world">
+      <div id="paper-light" aria-hidden="true"></div>
+      <div id="brand"><img src="brand.svg" alt=""><span>Vaultrobe</span></div>
+      <div id="analytics" class="phone"><img src="analytics.jpg" width="636" height="1480" alt="Wardrobe analytics, category breakdown and color palette"></div>
+      <div id="closet" class="phone"><img src="closet.jpg" width="636" height="1480" alt="Vaultrobe closet showing garments, categories and wardrobe tools"></div>
+      <div id="copy">
+        <h1><span class="mask"><span class="line">Your wardrobe.</span></span><span class="mask"><span class="line">Private.</span></span><span class="mask accent"><span class="line">Thoughtfully</span></span><span class="mask accent" style="margin-top:0"><span class="line">intelligent.</span></span></h1>
+      </div>
+      <a id="cta" href="https://play.google.com/store/apps/details?id=com.vaultrobe.app" target="_blank" rel="noopener noreferrer">Get on Google Play <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 12h16m-6-6 6 6-6 6"/></svg></a>
+    </div>
+  </main>
+  <div id="review" role="group" aria-label="Film review controls">
+    <button id="play" type="button">Play</button>
+    <button id="restart" type="button">Restart</button>
+    <input id="scrub" type="range" min="0" max="18" step="0.01" value="0" aria-label="Film time in seconds">
+    <output id="clock" for="scrub">0.00s</output>
+  </div>
+  <script src="gsap.min.js"></script>
+  <script>
+    (() => {
+      'use strict';
+      const Q = new URLSearchParams(location.search);
+      const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+      const portrait = matchMedia('(max-aspect-ratio: 4/5)').matches;
+      const stage = document.querySelector('#stage');
+      const cta = document.querySelector('#cta');
+      const duration = 18;
+      const width = portrait ? 1080 : 1920;
+      const height = portrait ? 1920 : 1080;
+      // Portrait is an authored composition, rather than a tiny landscape film.
+      // Its orientation is fixed for the lifetime of this shot; resize fits it.
+      if (portrait) {
+        stage.style.width = width + 'px'; stage.style.height = height + 'px';
+        Object.assign(document.querySelector('#closet').style, {left:'550px',top:'220px',width:'360px'});
+        Object.assign(document.querySelector('#analytics').style, {left:'205px',top:'330px',width:'310px'});
+        Object.assign(document.querySelector('#brand').style, {left:'90px',top:'80px'});
+        Object.assign(document.querySelector('#copy').style, {left:'90px',top:'1080px',width:'900px'});
+        document.querySelector('h1').style.fontSize = '100px';
+        document.querySelectorAll('.accent').forEach(el => el.style.fontSize = '94px');
+        Object.assign(cta.style, {left:'90px',top:'1680px'});
+      }
+      const fit = () => stage.style.transform = `translate(-50%,-50%) scale(${Math.min(innerWidth/width,innerHeight/height)})`;
+      addEventListener('resize', fit); fit();
+      if (!window.gsap) { stage.style.visibility='visible'; return; }
+      const tl = gsap.timeline({paused:true,defaults:{ease:'power2.inOut'}});
+      const review = document.querySelector('#review');
+      const scrub = document.querySelector('#scrub');
+      const button = document.querySelector('#play');
+      const clock = document.querySelector('#clock');
+      const initial = portrait ? {scale:2.2,x:-1066,y:-360} : {scale:2.2,x:-2422,y:-600};
+      const detail = portrait ? {scale:2.05,x:-957,y:-310} : {scale:2.05,x:-2185,y:-540};
+      // One shared camera. The wardrobe screenshot persists through every beat.
+      tl.fromTo('#world',initial,{...detail,duration:3.6,ease:'sine.inOut',immediateRender:false},0);
+      tl.to('#world',{scale:1,x:0,y:0,duration:6.6,ease:'power2.inOut'},3.6);
+      tl.fromTo('#analytics',{opacity:0},{opacity:1,duration:2,immediateRender:false},7.2);
+      tl.fromTo('#brand',{opacity:0,y:12},{opacity:1,y:0,duration:1.1,immediateRender:false},9.2);
+      tl.fromTo('.line',{yPercent:110},{yPercent:0,duration:1.2,stagger:0.16,ease:'power3.out',immediateRender:false},9.5);
+      // The CTA remains noninteractive while physically off camera; focus seeks
+      // the finished frame so keyboard users never chase a moving link.
+      tl.fromTo('#cta',{opacity:0},{opacity:1,duration:0.6,immediateRender:false},11.1);
+      tl.fromTo('#paper-light',{x:0},{x:50,duration:12,ease:'sine.inOut',immediateRender:false},0);
+      tl.to({}, {duration:0.01},duration-0.01);
+      let userPaused = false;
+      let visibilityPaused = false;
+      const update = () => {
+        scrub.value = String(tl.time()); clock.value = tl.time().toFixed(2)+'s';
+        button.textContent = tl.paused() ? 'Play' : 'Pause';
+        cta.style.pointerEvents = tl.time() < 11.1 ? 'none' : 'auto';
+      };
+      tl.eventCallback('onUpdate',update);
+      tl.eventCallback('onComplete',() => {
+        if (Q.has('loop') && !reduced.matches && !userPaused) tl.play(0);
+        else { tl.pause(); update(); }
+      });
+      const seek = seconds => { userPaused=true; tl.pause(); tl.time(Math.max(0,Math.min(duration,seconds)),true); update(); };
+      const play = () => {
+        if (reduced.matches) { seek(duration); return; }
+        userPaused=false;
+        if (tl.progress()>=1) tl.play(0); else tl.play();
+        update();
+      };
+      const toggle = () => { if(tl.paused()) play(); else {userPaused=true;tl.pause();update();} };
+      button.onclick=toggle;
+      document.querySelector('#restart').onclick=() => {seek(0);play();};
+      scrub.oninput=() => seek(Number(scrub.value));
+      cta.addEventListener('focus',() => seek(duration));
+      addEventListener('keydown',event => {
+        if (event.target.closest('input,button,a')) return;
+        if(event.code==='Space'){event.preventDefault();toggle();}
+        if(event.key.toLowerCase()==='r'){seek(0);play();}
+      });
+      if(Q.has('debug'))review.classList.add('on');
+      document.addEventListener('visibilitychange',() => {
+        if(document.hidden){visibilityPaused=!tl.paused();tl.pause();}
+        else if(visibilityPaused&&!userPaused&&!reduced.matches){visibilityPaused=false;tl.play();}
+      });
+      reduced.addEventListener('change',() => {if(reduced.matches)seek(duration);});
+      // Same review/export contract as Bang Motion's starter, without a rAF loop.
+      window.OPENER={tl,DURATION:duration,seek,seekFrame:async seconds=>seek(seconds),ready:false};
+      Promise.all([document.fonts.ready,...[...document.images].map(img=>img.decode().catch(()=>{}))]).then(() => {
+        stage.classList.add('film-ready');
+        // Initialize the zero-time camera before exposing the first frame.
+        // A paused timeline at exactly zero otherwise hasn't rendered yet.
+        tl.time(0.000001,true).time(0,true);
+        window.OPENER.ready=true;
+        if(reduced.matches)seek(duration);
+        else if(Q.has('t'))seek(Number(Q.get('t'))||0);
+        else if(Q.has('clean'))seek(0);
+        else {tl.time(0);play();}
+        stage.style.visibility='visible';
+      });
+    })();
+  </script>
+</body>
+</html>
