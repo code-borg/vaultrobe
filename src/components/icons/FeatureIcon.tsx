@@ -27,6 +27,7 @@ import {
   ThumbsDown,
   Scale,
   Smartphone,
+  PersonStanding,
   type LucideIcon,
 } from "lucide-react";
 
@@ -59,6 +60,7 @@ const iconMap: Record<string, LucideIcon> = {
   ThumbsDown,
   Scale,
   Smartphone,
+  PersonStanding,
 };
 
 interface FeatureIconProps {

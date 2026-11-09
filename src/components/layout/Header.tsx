@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X, Moon, Sun, Smartphone } from "lucide-react";
 import { useTheme } from "@/components/providers/ThemeProvider";
@@ -49,8 +50,8 @@ export function Header() {
       )}
     >
       <div className="mx-auto flex max-w-6xl items-center justify-between px-5 sm:px-8">
-        <a
-          href="#top"
+        <Link
+          href="/"
           className="group flex items-center gap-3"
           aria-label={`${siteConfig.name} home`}
         >
@@ -64,19 +65,22 @@ export function Header() {
           <span className="font-display text-xl font-semibold tracking-wide text-lux-ivory transition group-hover:text-lux-gold">
             {siteConfig.name}
           </span>
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-1 md:flex">
           {navLinks.map((link) => (
-            <motion.a
+            <motion.div
               key={link.href}
-              href={link.href}
-              className="rounded-full px-4 py-2 text-sm font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
               whileHover={{ y: -1 }}
               transition={{ type: "spring", stiffness: 400, damping: 25 }}
             >
-              {link.label}
-            </motion.a>
+              <Link
+                href={link.href}
+                className="block rounded-full px-4 py-2 text-sm font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
+              >
+                {link.label}
+              </Link>
+            </motion.div>
           ))}
         </nav>
 
@@ -138,17 +142,20 @@ export function Header() {
           >
             <div className="flex flex-col gap-1 px-5 py-4">
               {navLinks.map((link, i) => (
-                <motion.a
+                <motion.div
                   key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
                   initial={{ opacity: 0, x: -12 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.05 + i * 0.05 }}
-                  className="rounded-xl px-4 py-3 text-base font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
                 >
-                  {link.label}
-                </motion.a>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block rounded-xl px-4 py-3 text-base font-medium text-lux-ink-soft transition hover:bg-hover-fill hover:text-lux-gold"
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
               ))}
               <motion.a
                 href={siteConfig.playStoreUrl}

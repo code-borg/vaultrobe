@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { GlassCard } from "@/components/ui/GlassCard";
@@ -77,7 +78,10 @@ export function Privacy() {
           viewport={viewOnce}
           transition={{ duration: 0.6, ease: easeOutExpo }}
         >
-          {privacyCopy.closer}
+          {privacyCopy.closer}{" "}
+          <Link href="/privacy" className="text-lux-gold underline-offset-4 hover:underline">
+            Privacy Policy
+          </Link>
         </motion.p>
       </div>
     </section>

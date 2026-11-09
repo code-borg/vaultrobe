@@ -6,6 +6,7 @@ import {
   Camera,
   Crop,
   Lightbulb,
+  PersonStanding,
   Shirt,
   Sparkles,
 } from "lucide-react";
@@ -14,7 +15,7 @@ import { GlassCard } from "@/components/ui/GlassCard";
 import { gettingStartedCopy, heroCopy } from "@/lib/landing-copy";
 import { easeOutExpo, scaleIn, viewOnce, viewOnceLoose } from "@/lib/motion";
 
-const tipIcons = [Lightbulb, Camera, Crop, Shirt, Sparkles];
+const tipIcons = [Lightbulb, Camera, Crop, Shirt, Sparkles, PersonStanding];
 
 export function GettingStarted() {
   const reduceMotion = useReducedMotion();

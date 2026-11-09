@@ -87,8 +87,7 @@ export default function TwitterImage() {
             lineHeight: 1.4,
           }}
         >
-          Premium Android digital wardrobe · AI scan · Outfit planner · Local-first
-          privacy
+          Premium Android digital wardrobe · Virtual try-on · AI scan · Privacy-first
         </p>
 
         <div

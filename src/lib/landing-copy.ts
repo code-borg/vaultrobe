@@ -20,22 +20,24 @@ import type {
 const play = siteConfig.playStoreUrl;
 
 export const navLinks: LandingNavLink[] = [
-  { href: "#why", label: "Why" },
-  { href: "#insights", label: "Insights" },
-  { href: "#outfits", label: "Outfits" },
-  { href: "#privacy", label: "Privacy" },
-  { href: "#getting-started", label: "Get started" },
+  { href: "/#why", label: "Why" },
+  { href: "/#insights", label: "Insights" },
+  { href: "/#outfits", label: "Outfits" },
+  { href: "/#privacy", label: "Privacy" },
+  { href: "/#getting-started", label: "Get started" },
 ];
 
 export const seoCopy: SeoCopy = {
   title: "Vaultrobe — Privacy-first digital wardrobe for Android",
   description:
-    "Catalog your closet, uncover wear insights, and get smart, weather-aware outfit recommendations. Vaultrobe is a privacy-first Android wardrobe app — on-device by design.",
+    "Catalog your closet, try pieces on virtually, and get weather-aware outfit recommendations. Vaultrobe keeps your closet on your phone. AI photo features use HTTPS.",
   ogTitle: "Vaultrobe — Your wardrobe, private and clear",
   ogDescription:
-    "A calm digital closet with bulk upload, wardrobe insights, and thoughtful outfit recommendations. Built for Android. Built for privacy.",
+    "A calm digital closet with virtual try-on, bulk upload, wardrobe insights, and thoughtful outfit recommendations. Built for Android.",
   keywords: [
     "digital wardrobe",
+    "virtual try-on",
+    "AI try on clothes",
     "privacy-first closet app",
     "Android wardrobe",
     "on-device wardrobe",
@@ -54,9 +56,10 @@ export const heroCopy: HeroCopy = {
   headline: "Your wardrobe. Private.",
   headlineAccent: "Thoughtfully intelligent.",
   subheadline:
-    "Vaultrobe helps you spend less time deciding what to wear and more time feeling good in your clothes. See what you actually own, understand how you wear it, and get thoughtful outfit suggestions — all while keeping your wardrobe completely private on your device.",
+    "Vaultrobe helps you spend less time deciding what to wear and more time feeling good in your clothes. See what you own, try a piece on before you wear it, and get thoughtful outfit suggestions. Your closet catalog stays on your phone.",
   chips: [
-    { label: "On-device by design", icon: "Shield" },
+    { label: "Private by design", icon: "Shield" },
+    { label: "Virtual try-on", icon: "PersonStanding" },
     { label: "Bulk upload & garment scan", icon: "Upload" },
     { label: "Insights that actually help", icon: "BarChart3" },
   ],
@@ -139,8 +142,15 @@ export const outfitsCopy: OutfitsCopy = {
   label: "Outfits",
   title: "Outfits that fit your day — not a trend feed.",
   subtitle:
-    "Smart, weather-aware recommendations shaped by color harmony, formality, and how your pieces work together — refined by the looks you skip.",
+    "Try a saved piece on you, then shape the rest of the day with weather-aware recommendations — color, formality, and the looks you skip.",
   items: [
+    {
+      title: "Virtual try-on",
+      description:
+        "Add a full-body photo and see that garment on you. Save or share the look when it feels right.",
+      icon: "PersonStanding",
+      highlight: true,
+    },
     {
       title: "Weather-aware",
       description: "Dress for the forecast, not the guesswork.",
@@ -166,7 +176,6 @@ export const outfitsCopy: OutfitsCopy = {
       title: "Thoughtful by design",
       description: "Clear, rule-based intelligence you can trust.",
       icon: "Scale",
-      highlight: true,
     },
   ],
   reassurance:
@@ -177,7 +186,7 @@ export const easyStartCopy: EasyStartCopy = {
   label: "Easy start",
   title: "Your closet, on your phone — without the endless setup.",
   subtitle:
-    "Start with what you already have. Bulk upload from your gallery, scan garments with AI assistance, and get clean product-style shots with background removal.",
+    "Start with what you already have. Bulk upload from your gallery, scan garments with AI assistance, and try a piece on once it is in your closet.",
   items: [
     {
       title: "Bulk upload from gallery",
@@ -199,6 +208,13 @@ export const easyStartCopy: EasyStartCopy = {
       icon: "Eraser",
     },
     {
+      title: "Virtual try-on",
+      description:
+        "Open any saved piece, add your photo, and generate a look before you get dressed.",
+      icon: "PersonStanding",
+      highlight: true,
+    },
+    {
       title: "Family profiles",
       description:
         "Separate wardrobes for everyone in the home — when you’re ready.",
@@ -210,35 +226,34 @@ export const easyStartCopy: EasyStartCopy = {
 
 export const privacyCopy: PrivacyCopy = {
   label: "Privacy",
-  title: "Your wardrobe stays completely private.",
+  title: "Your closet stays on your phone.",
   subtitle:
-    "Vaultrobe is built with privacy at its core. Your clothes, photos, habits, and preferences live on your device — not in the cloud and never shared with stylists or anyone else.",
+    "Wardrobe items, wear history, and preferences are stored on your device. Photos are sent off the phone only when you run AI indexing or virtual try-on, or when you turn on backup.",
   items: [
     {
-      title: "On-device by design",
-      description: "Your wardrobe data never leaves your phone.",
+      title: "Closet stored on device",
+      description: "Your catalog, habits, and preferences live in the app on your phone.",
       icon: "Smartphone",
       highlight: true,
     },
     {
-      title: "No stylists. No social features.",
-      description: "No one sees your closet except you.",
+      title: "AI photos over HTTPS",
+      description:
+        "Indexing and virtual try-on send the photos you choose through Firebase, encrypted in transit.",
       icon: "Shield",
     },
     {
-      title: "Optional encrypted backup",
-      description: "You control when and if it happens.",
+      title: "Optional backup",
+      description: "Google Drive backup runs only after you connect it.",
       icon: "Cloud",
     },
     {
-      title: "Intelligent suggestions without intrusion",
-      description:
-        "Smart recommendations that don’t require sending your data anywhere.",
+      title: "No ads. No public closet.",
+      description: "Your wardrobe is not a feed, and the app does not include an ad SDK.",
       icon: "Sparkles",
     },
   ],
-  closer:
-    "Privacy isn’t a feature we added. It’s how Vaultrobe was built.",
+  closer: "Wardrobe indexing and virtual try-on are explained in the",
 };
 
 export const gettingStartedCopy: GettingStartedCopy = {
@@ -261,7 +276,7 @@ export const gettingStartedCopy: GettingStartedCopy = {
       step: 3,
       title: "Explore insights & outfits",
       description:
-        "See what’s in your closet — then get weather-aware suggestions for the day.",
+        "See what’s in your closet, try a piece on, and get weather-aware suggestions for the day.",
     },
   ],
   note: "Family profiles can wait. Day one is about your wardrobe.",
@@ -295,16 +310,21 @@ export const gettingStartedCopy: GettingStartedCopy = {
         description:
           "Smooth out wrinkles and remove tags or stickers before photographing.",
       },
+      {
+        title: "Try-on photo",
+        description:
+          "For virtual try-on, use a full-body photo facing the camera. The garment photo is the one already saved on that item.",
+      },
     ],
     closer:
-      "Good photos lead to better organization and more accurate suggestions.",
+      "Good photos lead to better organization, clearer try-on, and more accurate suggestions.",
   },
 };
 
 export const finalCtaCopy: FinalCtaCopy = {
   title: "A wardrobe that works with you — privately.",
   subtitle:
-    "Catalog with ease. Understand what you own. Dress for the day with smart recommendations — designed to stay on your device.",
+    "Catalog with ease. Try pieces on. Dress for the day with smart recommendations. Your closet catalog stays on your phone.",
   primaryCta: { label: "Get on Google Play", href: play },
   secondaryCta: { label: "See how it works", href: "#why" },
   micro: "Your clothes. Your data. Your judgment.",
@@ -313,10 +333,11 @@ export const finalCtaCopy: FinalCtaCopy = {
 export const footerCopy: FooterCopy = {
   tagline: "Privacy-first digital wardrobe for Android.",
   productLinks: [
-    { href: "#insights", label: "Insights" },
-    { href: "#outfits", label: "Outfits" },
-    { href: "#start", label: "Easy start" },
-    { href: "#privacy", label: "Privacy" },
+    { href: "/#insights", label: "Insights" },
+    { href: "/#outfits", label: "Outfits" },
+    { href: "/#start", label: "Easy start" },
+    { href: "/#privacy", label: "Privacy" },
+    { href: "/privacy", label: "Privacy Policy" },
   ],
 };
 
@@ -325,6 +346,7 @@ export const jsonLdFeatures = [
   "On-device digital closet",
   "Bulk gallery upload",
   "AI garment scanning",
+  "Virtual try-on",
   "Background removal",
   "Wardrobe insights & never-worn",
   "Weather-aware outfit recommendations",

@@ -106,7 +106,7 @@ export default function OpenGraphImage() {
             lineHeight: 1.4,
           }}
         >
-          On-device closet · Wardrobe insights · Weather-aware recommendations
+          Virtual try-on · Wardrobe insights · Weather-aware recommendations
         </p>
 
         <div

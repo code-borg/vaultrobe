@@ -52,6 +52,7 @@ function friendlyFeatureTitle(feature: string): string {
     [/background removal/i, "Instant background removal"],
     [/photo editor.*/i, "Built-in photo editor"],
     [/ai outfit recommendations/i, "AI outfit recommendations"],
+    [/virtual try-on|try-on/i, "Virtual try-on"],
     [/freeform outfit canvas.*/i, "Freeform outfit canvas"],
     [/laundry tracker.*/i, "Laundry tracker"],
     [/weekly outfit planner/i, "Weekly outfit planner"],
@@ -83,6 +84,8 @@ function friendlyFeatureBlurb(feature: string): string {
     return "Clean studio-style shots without the messy background.";
   if (s.includes("photo editor") || s.includes("crop"))
     return "Crop, rotate, and refine every garment photo.";
+  if (s.includes("try-on") || s.includes("try on"))
+    return "See a saved garment on you before you wear it.";
   if (s.includes("recommend"))
     return "Get looks that match your style and the day ahead.";
   if (s.includes("canvas") || s.includes("collage"))
@@ -122,6 +125,7 @@ function friendlyFeatureBlurb(feature: string): string {
 
 export function iconForLabel(label: string): string {
   const s = label.toLowerCase();
+  if (s.includes("try-on") || s.includes("try on")) return "PersonStanding";
   if (s.includes("ai") || s.includes("scan") || s.includes("classif"))
     return "Sparkles";
   if (s.includes("background") || s.includes("removal")) return "Eraser";
@@ -161,7 +165,7 @@ export function iconForLabel(label: string): string {
   return "Sparkles";
 }
 
-const HIGHLIGHT_KEYWORDS = ["ai", "multi-profile", "family", "recommend", "scan"];
+const HIGHLIGHT_KEYWORDS = ["ai", "try-on", "multi-profile", "family", "recommend", "scan"];
 
 function isHighlightFeature(feature: string): boolean {
   const s = feature.toLowerCase();
@@ -181,7 +185,7 @@ export const siteConfig = {
   tagline: "Your wardrobe, private and clear.",
   /** Meta / social description */
   description:
-    "Catalog your closet, uncover wear insights, and get smart, weather-aware outfit recommendations. Vaultrobe is a privacy-first Android wardrobe app — on-device by design.",
+    "Catalog your closet, try pieces on virtually, and get weather-aware outfit recommendations. Vaultrobe keeps your closet on your phone. AI photo features use HTTPS.",
   fullDescription: consumerCopy(app.fullDescription || rawDescription),
   url: siteUrl,
   packageName: app.packageName,
@@ -189,6 +193,7 @@ export const siteConfig = {
   locale: "en_US",
   twitterHandle: `@${app.appName.toLowerCase()}`,
   playStoreUrl: `https://play.google.com/store/apps/details?id=${app.packageName}`,
+  privacyPolicyUrl: `${siteUrl}/privacy`,
 };
 
 // ─── Hero ───────────────────────────────────────────────────────────────────
@@ -223,6 +228,7 @@ const SHOWCASE_PRIORITY = [
   "Home / Dashboard",
   "Home",
   "AI Scan",
+  "Virtual Try-On",
   "Outfit Planner",
   "Plan",
   "Laundry Tracker",
@@ -265,6 +271,8 @@ function screenBlurb(screen: string): string {
     return "Browse every piece in a polished digital closet.";
   if (s.includes("home") || s.includes("dashboard"))
     return "Your style hub — outfits, plans, and what’s next.";
+  if (s.includes("try-on") || s.includes("try on"))
+    return "See this piece on you before you wear it.";
   if (s.includes("scan") || s.includes("ai"))
     return "Point, shoot, and catalog garments in seconds.";
   if (s.includes("plan"))
@@ -298,6 +306,7 @@ function visualKeyForScreen(screen: string): string {
     return "closet";
   if (s.includes("collection") || (s.includes("outfit") && !s.includes("plan")))
     return "collections";
+  if (s.includes("try-on") || s.includes("try on")) return "tryon";
   if (s.includes("scan") || s.includes("ai") || s.includes("camera"))
     return "scan";
   if (s.includes("calendar") || s.includes("wear")) return "calendar";

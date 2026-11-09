@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { BrandLogo } from "@/components/icons/BrandLogo";
 import { siteConfig } from "@/lib/data";
 import { footerCopy } from "@/lib/landing-copy";
@@ -16,8 +17,8 @@ export function Footer() {
       <div className="mx-auto max-w-6xl px-5 sm:px-8">
         <div className="flex flex-col items-center justify-between gap-8 md:flex-row md:items-start">
           <div>
-            <a
-              href="#top"
+            <Link
+              href="/"
               className="flex items-center gap-2.5"
               aria-label={`${siteConfig.name} home`}
             >
@@ -25,7 +26,7 @@ export function Footer() {
               <span className="font-display text-lg font-semibold text-lux-ivory">
                 {siteConfig.name}
               </span>
-            </a>
+            </Link>
             <p className="mt-3 max-w-xs text-sm text-lux-ink-soft">
               {footerCopy.tagline}
             </p>
@@ -33,13 +34,13 @@ export function Footer() {
 
           <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
             {footerCopy.productLinks.map((link) => (
-              <a
+              <Link
                 key={link.href}
                 href={link.href}
                 className="text-sm text-lux-ink-soft transition hover:text-lux-gold"
               >
                 {link.label}
-              </a>
+              </Link>
             ))}
             <a
               href={siteConfig.playStoreUrl}

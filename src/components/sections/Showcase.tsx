@@ -405,6 +405,35 @@ function ShowcaseScreen({
         </div>
       )}
 
+      {visual === "tryon" && (
+        <div className="flex flex-1 flex-col gap-3">
+          <div className="grid flex-1 grid-cols-2 gap-2">
+            {["You", "Garment"].map((label) => (
+              <div
+                key={label}
+                className="flex flex-col justify-end rounded-2xl border border-subtle p-2"
+                style={{
+                  background: `linear-gradient(180deg, ${color}28, #0e0c0a)`,
+                }}
+              >
+                <span className="text-[10px] uppercase tracking-wider text-lux-ink-faint">
+                  {label}
+                </span>
+              </div>
+            ))}
+          </div>
+          <div
+            className="rounded-full py-2 text-center text-[10px] font-medium"
+            style={{ background: color, color: "#161208" }}
+          >
+            Try on
+          </div>
+          <p className="px-1 text-center text-[10px] text-lux-ink-faint">
+            {description}
+          </p>
+        </div>
+      )}
+
       {visual === "editor" && (
         <div className="flex flex-1 flex-col items-center justify-center gap-4">
           <motion.div

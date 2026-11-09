@@ -62,6 +62,9 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
+  verification: {
+    google: "zMlAA7JtVte8F5T9qgKWB2IOTkR-55zeIUZelq5oXvc",
+  },
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",

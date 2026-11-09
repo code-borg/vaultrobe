@@ -1,7 +1,7 @@
 {
   "name": "Vaultrobe",
   "short_name": "Vaultrobe",
-  "description": "Premium Android digital wardrobe manager",
+  "description": "Android digital wardrobe with virtual try-on, insights, and private closet storage",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#0E0C0A",
